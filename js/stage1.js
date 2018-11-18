@@ -1,0 +1,574 @@
+
+
+Stage1 = {
+
+
+
+    create: function() {
+   
+      
+       music =  game.add.audio('welcome')
+       music.loop = true;
+       music.volume = .1;
+       music.play();
+
+       var sartSound = game.add.audio('explosionStart');
+       sartSound.volume = .1;
+       sartSound.play()
+      
+   
+
+       
+       this.player;
+
+       this.controls = game.input.keyboard.createCursorKeys();
+   
+        
+   
+       this.bullets;
+       this.reload = 6;
+       this.spriteBullets = [];
+
+       //inventario
+       this.ammo = 999;
+
+
+
+
+
+        // tempo de disparo
+       this.fireRate = 1000;
+       this.nextFire = 0;
+       
+
+       game.world.setBounds(0, 0,2000, 2000);
+       game.add.tileSprite(0, 0, 2000, 2000, 'villagerGround');
+   
+       this.P = game.input.keyboard.addKey(Phaser.Keyboard.P); 
+       this.P.onDown.add(this.pause, this);
+
+
+        // player e camera
+        this.enemy1 = this.EnemyFactory(875,75,'RIGHT', 'zumbie1')
+        game.physics.arcade.enable(this.enemy1);
+
+        this.enemy2 = this.EnemyFactory(775,175,'LEFT', 'zumbie2')
+        game.physics.arcade.enable(this.enemy2);
+
+        this.enemy3 = this.EnemyFactory(75,775,'DOWN', 'zumbie3')
+        game.physics.arcade.enable(this.enemy3);
+
+
+       this.explosions = game.add.group();
+       this.explosions.createMultiple(30, 'blood');
+   
+
+       this.player = game.add.sprite(400, 400, 'player');
+       game.add.tileSprite(0, 0, 2000, 2000, 'noite');
+
+  
+
+
+       game.physics.startSystem(Phaser.Physics.P2JS);
+       game.camera.follow(this.player);
+       game.camera.deadzone = new Phaser.Rectangle(300, 300, 200, 200);
+       
+   
+       this.maze = [
+           [3,3,3,3,3,3,3,3,3,3,1,1,1,1,1,1,1,1,1,1,1,1],
+           [3,3,3,3,3,3,3,3,3,3,4,4,4,4,4,6,4,4,4,4,4,1],
+           [3,3,3,3,3,3,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,1],
+           [1,3,3,3,3,3,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,1],
+           [1,5,5,5,5,5,5,5,5,5,0,0,0,0,0,0,0,0,0,0,0,1],
+           [1,4,4,4,4,4,4,6,4,4,0,0,0,0,0,0,0,0,0,0,0,1],
+           [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+           [1,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+           [1,0,0,0,0,0,0,0,0,3,3,3,3,3,3,3,3,3,0,0,0,1],
+           [1,0,0,0,0,0,0,0,0,3,3,3,3,3,3,3,3,3,0,0,0,1],
+           [1,0,0,0,0,0,0,0,0,3,3,3,3,3,3,3,3,3,0,0,0,1],
+           [1,0,0,0,0,0,0,0,0,5,5,5,5,5,5,5,5,5,0,0,0,1],
+           [1,0,0,0,0,0,0,0,0,4,4,4,6,4,4,4,4,4,0,0,0,1],
+           [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+           [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+           [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+           [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+           [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+           [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+           [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+           [1,1,1,1,1,1,1,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1]
+         
+       ];
+   
+   
+
+
+          
+
+  // Balas
+   
+  this.bullets = game.add.group();
+  this.bullets.enableBody = true;
+  this.bullets.physicsBodyType = Phaser.Physics.ARCADE;
+
+
+  this.bullets.createMultiple(50, 'bullet');
+  this.bullets.setAll('checkWorldBounds', true);
+  this.bullets.setAll('outOfBoundsKill', true);
+  
+      
+   
+   
+       // paredes
+       this.blocks = game.add.group();
+       this.blocks.enableBody = true;
+
+       this.telhado = game.add.group();
+   
+           
+           for(var row in this.maze){
+               for(var col in this.maze[row]){
+                   var tile = this.maze[row][col];
+                   
+                   var x = col * 50;
+                   var y = row * 50;
+                   
+                   if(tile === 1){
+                       var block = this.blocks.create(x,y,'block');
+                           block.body.immovable = true;
+   
+                   } else
+                   if(tile === 2){
+   
+                       this.player.anchor.set(.5);
+                       game.physics.arcade.enable(this.player);
+                       game.physics.p2.enable(this.player);
+   
+                       this.player.animations.add('goDown',[0,1,2,3],12,true);
+                       this.player.animations.add('goLeft',[4,5,6,7],12,true);
+                       this.player.animations.add('goRight',[8,9,10,11],12,true);
+                       this.player.animations.add('goUp',[12,13,14,15],12,true);
+                       this.player.animations.add('shotingDown',[16],4,true);
+                       this.player.animations.add('shotingLeft',[20],4,true);
+                       this.player.animations.add('shotingRight',[24],4,true);
+                       this.player.animations.add('shotingUp',[28],4,true);
+
+                   } else
+                   if(tile === 3){
+                    var telhado = this.blocks.create(x,y,'telhado');
+                        telhado.body.immovable = true;
+
+                   }else
+                   if(tile === 4){
+                    var paredesMadeira = this.blocks.create(x,y,'paredeMadeira');
+                        paredesMadeira.body.immovable = true;
+                   }else
+                   if(tile === 5){
+                    var paredeAlta = this.blocks.create(x,y,'paredeAlta');
+                        paredeAlta.body.immovable = true;
+                   }else
+                   if(tile === 6){
+                    var door = this.blocks.create(x,y,'door1');
+                    door.body.immovable = true;
+                   }
+               }
+           }
+   
+
+           this.bulletsCount = game.add.text(130,15,'', {font:'25px ', fill:'#fff'})
+           this.bulletsCount.fixedToCamera=true;
+
+           this.pauseText =  game.add.text(330,220,'', {font:'50px ', fill:'#fff'});
+           this.pauseText.fixedToCamera=true;
+
+   },
+   
+    update: function() {
+       this.player.body.velocity.x = 0;
+       this.player.body.velocity.y = 0;
+
+       game.physics.arcade.collide(this.player,this.blocks);
+
+         this.p1 = game.physics.arcade.overlap(this.bullets,this.enemy1.animation, this.damageControll,null, this);
+         this.p2 = game.physics.arcade.overlap(this.bullets,this.enemy2.animation, this.damageControll,null, this);
+         this.p3 = game.physics.arcade.overlap(this.bullets,this.enemy3.animation,this.damageControll,null, this);
+
+        this.blood()
+
+        // DIRECIONAL WASD OPCIONAL
+        this.W = game.input.keyboard.addKey(Phaser.Keyboard.W);
+        this.A = game.input.keyboard.addKey(Phaser.Keyboard.A);
+        this.S = game.input.keyboard.addKey(Phaser.Keyboard.S);
+        this.D = game.input.keyboard.addKey(Phaser.Keyboard.D); 
+
+     
+
+    if (game.input.mousePointer.isDown){
+        // captura rotação do mouser arredonda pra baixo  
+        var direct = Math.floor(Math.round(game.physics.arcade.angleToPointer(this.player)))
+      
+      if( direct==3 || direct==-3){
+        this.player.direction = "shotingLeft";
+        this.fire(-20,-5);
+
+      }else
+      if(direct==0){
+        this.player.direction = "shotingRight";
+        this.fire(10,0);
+
+        }else
+
+      if(direct<0){
+        this.player.direction = "shotingUp";
+        this.fire(-7,-30);
+
+      }else if(direct>0){
+        this.player.direction = "shotingDown";
+        this.fire(-5,20);
+
+      }
+    }
+  
+
+    this.moveEnemy(this.enemy1.animation)   
+    this.moveEnemy(this.enemy2.animation)   
+    this.moveEnemy(this.enemy3.animation)   
+
+
+    //impede personagem de andar atirando...
+    if(!this.input.mousePointer.isDown){
+    
+        // player movimento
+       if(this.controls.left.isDown &&
+         !this.controls.right.isDown ||
+         this.A.isDown && !this.D.isDown){
+
+        this.player.body.velocity.x = -200;
+        this.player.direction = "left";
+      
+    } else
+    if(this.controls.right.isDown &&
+       !this.controls.left.isDown ||
+        this.D.isDown && !this.A.isDown){
+
+        this.player.body.velocity.x =200;
+        this.player.direction = "right";
+    }
+    
+    if(this.controls.up.isDown &&
+      !this.controls.down.isDown ||
+      this.W.isDown && !this.S.isDown){
+
+        this.player.body.velocity.y = -200;
+        this.player.direction = "up";
+
+    } else
+    if(this.controls.down.isDown &&
+       !this.controls.up.isDown ||
+       this.S.isDown && !this.W.isDown){
+
+        this.player.body.velocity.y = 200;
+        this.player.direction = "down";
+    }
+    }
+      
+   
+       switch(this.player.direction){ 
+           case "left":
+               this.player.animations.play('goLeft'); break;
+           case "right":
+               this.player.animations.play('goRight'); break;
+           case "up":
+               this.player.animations.play('goUp'); break;
+           case "down":
+               this.player.animations.play('goDown'); break;
+         case "shotingDown":
+               this.player.animations.play('shotingDown'); break;
+         case "shotingLeft":
+               this.player.animations.play('shotingLeft'); break;
+         case "shotingRight":
+               this.player.animations.play('shotingRight'); break;
+         case "shotingUp":
+               this.player.animations.play('shotingUp'); break;
+         
+
+      
+            }
+       
+       if(this.player.body.velocity.x === 0 && this.player.body.velocity.y === 0){
+           this.player.animations.stop();
+       }
+   
+   },
+   pause : function(){
+
+    if(game.paused==true){
+        game.paused=false;
+        this.pauseText.text = ''
+
+    }else if(game.paused==false){
+        game.paused=true;
+        this.pauseText.text = 'Pause'
+        return;
+    }
+ },
+
+   // Display bullets
+   displayStatus : function(){
+
+    this.spriteBullets.forEach(element => element.destroy());
+    this.spriteBullets =[]
+
+    for(var i =0; i<this.reload; i++){
+        var pos = 200+(20*i)
+
+        var imagem = game.add.image(pos,15,'ammo');
+        imagem.fixedToCamera=true;
+        this.spriteBullets.push(imagem)
+    }  
+},
+
+
+   //dispara bala do revolve
+   fire: function(x,y) {
+   
+    // atualiza display a cada disparo
+    this.displayStatus()
+
+
+       if(game.time.now >  this.nextFire && this.bullets.countDead() > 0){  
+        
+
+   
+
+        if(this.reload>0){
+         // remove uma bala 
+         this.reload--;
+
+        this.nextFire = game.time.now + this.fireRate;
+        var bullet = this.bullets.getFirstDead();
+   
+           bullet.reset(this.player.x +x , this.player.y + y);
+   
+           game.physics.arcade.moveToPointer(bullet,4500);
+   
+           var songShoting = game.add.audio('oneshot');
+               songShoting.volume = .7;
+               songShoting.play()
+
+        
+        }else if(game.time.now >  this.nextFire && this.bullets.countDead() > 0){
+            this.nextFire = game.time.now + this.fireRate;
+    
+            var UpBullets = game.input.keyboard.addKey(Phaser.Keyboard.R);
+            UpBullets.onDown.add(this.reloadWeapon, this);
+    
+        var noBullets = game.add.audio('reload');
+        noBullets.volume = .5;
+        noBullets.play()
+        }
+     
+      
+    }
+   
+},
+
+   reloadWeapon: function(){
+
+ if(this.reload<6){
+    this.bulletsCount.text =this.ammo+' / ';
+
+    this.reload++;
+    var reloading = game.add.audio('reload');
+    reloading.volume = .7;
+    reloading.play()
+    this.ammo--;
+    // atualiza display das balas
+    this.displayStatus()
+
+     }
+
+},
+
+blood :  function(){
+
+    if(this.p1==true){
+        this.enemy1.life-=25
+        console.log(this.enemy1.life);
+        var explosion = this.explosions.getFirstExists(false);
+        explosion.reset(this.enemy1.animation.x, this.enemy1.animation.y);
+        explosion.play('blood', 30, true, true);
+    
+        setTimeout(function(){ explosion.kill()},5000)
+    }
+
+    if(this.p2==true){
+        this.enemy2.life-=25
+        console.log(this.enemy1.life);
+        var explosion = this.explosions.getFirstExists(false);
+        explosion.reset(this.enemy2.animation.x, this.enemy2.animation.y);
+        explosion.play('blood', 30, true, true);
+        setTimeout(function(){ explosion.kill()},5000)
+
+    }
+    if(this.p3==true){
+        this.enemy3.life-=25
+        console.log(this.enemy1.life);
+        var explosion = this.explosions.getFirstExists(false);
+        explosion.reset(this.enemy3.animation.x, this.enemy3.animation.y);
+        explosion.play('blood', 30, true, true);
+        setTimeout(function(){ explosion.kill()},5000)
+
+    }
+
+    return;
+},
+damageControll : function(){
+
+
+
+    var pain =Math.floor(Math.random() * 6)
+   switch(pain){
+       case 1:
+       var zumbie = game.add.audio('zombiewalker1');
+       zumbie.volume = .7;
+       zumbie.play();
+
+       break;
+
+       case 2:
+       var zumbie = game.add.audio('zombiewalker2');
+       zumbie.volume = .7;
+       zumbie.play()
+       break; 
+       
+       case 3:
+       var zumbie = game.add.audio('zombiewalker3');
+       zumbie.volume = .7;
+       zumbie.play()
+
+       break;
+       
+       case 4:
+       var zumbie = game.add.audio('zombiewalker4');
+       zumbie.volume = .7;
+       zumbie.play()
+
+       break; 
+       
+       case 5:
+       var zumbie = game.add.audio('zombiewalker5');
+       zumbie.volume = .7;
+       zumbie.play()
+
+       break;
+       
+   }
+   
+ },
+
+// Controle de inimigos
+	EnemyFactory : function(posX,posY, direction, enemySprite){
+
+		this.enemy = game.add.sprite(posX,posY,enemySprite);
+		this.enemy.anchor.set(0.5);
+        game.physics.arcade.enable(this.enemy);
+        
+        
+		this.enemy.animations.add('goDown',[0,1,2,3],4,true);
+		this.enemy.animations.add('goLeft',[4,5,6,7],12,true);
+		this.enemy.animations.add('goRight',[8,9,10,11],4,true);
+		this.enemy.animations.add('goUp',[12,13,14,15],4,true);
+		
+		this.enemy.direction = direction;
+        this.enemy.animations.add('kaboom');
+
+        var status = {life: 100, animation:this.enemy}
+
+     
+		return status;
+	},
+
+
+moveEnemy: function(enemy){
+
+    this.enemy = enemy;
+
+    if(Math.floor(this.enemy.x -25)%50 === 0 && Math.floor(this.enemy.y -25)%50 === 0){
+        var enemyCol = Math.floor(this.enemy.x / 50);
+        var enemyRow = Math.floor(this.enemy.y / 50);
+        var validPath = [];
+
+            if(this.maze[enemyRow][enemyCol -1]  < 1 &&
+               this.enemy.direction !== 'RIGHT' &&
+               this.player.x < this.enemy.x){
+                
+                    validPath.push('LEFT');
+            }
+
+            if(this.maze[enemyRow][enemyCol +1] < 1 &&
+               this.enemy.direction !== 'LEFT' &&
+               this.player.x > this.enemy.x){
+
+                    validPath.push('RIGHT');
+             }
+        
+
+
+            if(this.maze[enemyRow - 1][enemyCol]  < 1 &&
+               this.enemy.direction !== 'DOWN' &&
+               this.player.y < this.enemy.y){
+
+                validPath.push('UP');
+            }
+        
+
+            if(this.maze[enemyRow + 1][enemyCol]  < 1 &&
+               this.enemy.direction !== 'UP' &&
+               this.player.y > this.enemy.y){
+
+                validPath.push('DOWN');
+            }
+        
+
+      
+
+        this.enemy.direction = validPath[Math.floor(Math.random() * validPath.length)];
+    }
+
+    switch(this.enemy.direction){
+        case 'LEFT':
+            this.enemy.x -=2;
+                this.enemy.animations.play('goLeft');
+                break;
+        case 'RIGHT':
+            this.enemy.x +=2;
+                this.enemy.animations.play('goRight');
+                break;
+        case 'UP':
+            this.enemy.y -=2;
+                this.enemy.animations.play('goUp');
+                break;
+        case 'DOWN':
+            this.enemy.y +=2;
+                this.enemy.animations.play('goDown');
+                break;
+        
+    }
+
+
+},
+
+dieZombie : function(zombie){
+
+
+},
+
+render: function() {
+   
+   
+     //  game.debug.cameraInfo(game.camera, 32, 32);
+       game.debug.spriteCoords(this.player, 32, 500);
+
+   }
+   
+   }
