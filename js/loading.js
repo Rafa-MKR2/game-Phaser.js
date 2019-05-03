@@ -3,23 +3,22 @@
 Loading = {
    preload: function() {
    
-
-        var load =[];
-        var cont= 0;
-        var txt = game.add.text(550,540,'',{font:'40px ', fill:'#fff' });
-        var txtArray = ['L','O','A','D','I','N','G','.','.','.'];
+ 
+        var printLoad =[];
+        var letterNumb= 0;
+        var textLoadPosition = game.add.text(700,540,'',{font:'40px ', fill:'#fff' });
+        var CharateresArray = ['L','O','A','D','I','N','G','.','.','.'];
     
     
         var time = setInterval(function(){
-            load.push(txtArray[cont]);
-            cont++;
-            if(cont>txtArray.length){
-                cont =0; 
-                load=[] 
-                txt.text = '';
+          printLoad.push(CharateresArray[letterNumb]);
+          letterNumb++;
+            if(letterNumb>CharateresArray.length){
+              letterNumb =0; 
+                printLoad=[] 
+                textLoadPosition.text = '';
           }
-             txt.text = load.join('');
-             return load;
+          textLoadPosition.text = printLoad.join('');
             },500)
         
         game.load.audio('lavender', './sfx/Lavender.ogg'); 
@@ -35,6 +34,9 @@ Loading = {
         game.load.audio('zombiewalker6', './sfx/zombies/zombie-12.wav');
 
         game.load.audio('explosionStart', './sfx/synthetic_explosion_1.mp3');
+
+        
+        game.load.spritesheet('button', 'image/controles/flatDark35.png', 80, 80);
 
 
         game.load.spritesheet('rain','image/rain.png', 150,100);
@@ -54,51 +56,45 @@ Loading = {
         game.load.spritesheet('zumbie2','image/zombie06.png', 32,48);
         game.load.spritesheet('zumbie3','image/zombie08.png', 32,48);
 
+
+
         game.load.image('noite','image/noite.png', 50,50);
 
         game.load.image('background','image/bg.png',50,50);
         game.load.image('bullet', 'image/bullet.png');
         game.load.image('villagerGround','image/vilageground.png', 50,50);
 
-   
+    
+
     
     
     },
     
     create: function() {
     
+        
+      music = game.add.audio('lavender')
+      music.loop = true;
+      music.volume = .5;
+      music.play();
     
-      
-       music =  game.add.audio('lavender')
-       music.loop = true;
-       music.volume = .5;
-       music.play();
-    
-    
-    
+      //Particles rain 
         var emitter = game.add.emitter(game.world.centerX, 0, 400);
-    
-        emitter.width = game.world.width;
-        // emitter.angle = 30; // uncomment to set an angle for the rain.
-    
-        emitter.makeParticles('rain');
-    
-        emitter.minParticleScale = 0.1;
-        emitter.maxParticleScale = 0.5;
-    
-        emitter.setYSpeed(300, 500);
-        emitter.setXSpeed(-5, 5);
-    
-        emitter.minRotation = 0;
-        emitter.maxRotation = 0;
-    
-        emitter.start(false, 1600, 5, 0);
+            emitter.width = game.world.width
+            emitter.makeParticles('rain');
+            emitter.minParticleScale = 0.1;
+            emitter.maxParticleScale = 0.5;
+            emitter.setYSpeed(300, 500);
+            emitter.setXSpeed(-5, 5);
+        
+            emitter.minRotation = 0;
+            emitter.maxRotation = 0;
+            emitter.start(false, 1600, 5, 0);
     
         // chama menu
           setTimeout(function(){
             game.state.start("menu")
-
-          },1500)
+          },500)
       
     }
 }

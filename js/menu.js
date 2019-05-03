@@ -1,16 +1,19 @@
+
+
 Menu={
 
 
 create:function() {
 
-    var txt = game.add.text(120,100, 'Midnight Shadow', {font:'60px ', fill:'#fff'});
+    game.add.text(220,100, 'Midnight Shadow', {font:'60px ', fill:'#fff'});
+      
 
 
-    this.NewGame = game.add.text(300,300, 'New Game', {font:'40px ', fill:'#fff'});
-    this.cont = game.add.text(300,350, 'Continue', {font:'40px ', fill:'#fff'});
-    this.option = game.add.text(300,400, 'Options', {font:'40px ', fill:'#fff'});
+    this.NewGame = game.add.text(400,220, 'Novo Game', {font:'40px ', fill:'#fff'});
+    this.record = game.add.text(400,270, 'Recordes', {font:'40px ', fill:'#fff'});
+    this.option = game.add.text(400,320, 'Options', {font:'40px ', fill:'#fff'});
 
-    this.menu = [this.NewGame,this.cont,this.option];
+    this.menu = [this.NewGame,this.record,this.option];
     this.select = 0;
 
 
@@ -26,11 +29,16 @@ create:function() {
 
         
 
+    game.add.button(game.world.centerX - 95, 500, 'button', actionOnClick, this, 5, 5, 0);
 
 
+    function actionOnClick () {
 
+    console.log('teste')
+  
+  }
     function up(){
-        this.select =  this.select-1;
+        this.select = this.select-1;
 
         if(this.select<0){
             this.select=2;
@@ -69,9 +77,6 @@ checked : function(){
         if(item==this.menu[this.select]){
 
             this.menu[this.select].fill = 'red';
-
-
-
         }else{
         item.fill = '#fff'
 
@@ -83,18 +88,17 @@ checked : function(){
 confirmar : function(){
 
   var selecione = this.menu[this.select].text;
-  if(selecione=='New Game'){
+  if(selecione=='Novo Game'){
    
     music.pause();
     return game.state.start('stage1');
 
-  }else if(selecione=='Continue'){
-    console.log('continue...')
-    return;
+  }else if(selecione=='Recordes'){
+   
+    return game.state.start('recordes')
 
   }else if(selecione=='Options'){
-    console.log('Options...')
-    return;
+    return game.state.start('options');
 
   }
 }
