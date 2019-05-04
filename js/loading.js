@@ -40,8 +40,11 @@ Loading = {
         
         game.load.spritesheet('buttonA', 'image/controles/flatDark35.png', 80, 80);
         game.load.spritesheet('buttonB', 'image/controles/flatDark36.png', 80, 80);
-        game.load.spritesheet('buttonX', 'image/controles/flatDark37.png', 80, 80);
-        game.load.spritesheet('buttonY', 'image/controles/flatDark38.png', 80, 80);
+
+        game.load.spritesheet('buttonUp', 'image/controles/flatDark02.png', 80, 80);
+        game.load.spritesheet('buttonRight', 'image/controles/flatDark05.png', 80, 80);
+        game.load.spritesheet('buttonLeft', 'image/controles/flatDark04.png', 80, 80);
+        game.load.spritesheet('buttonDown', 'image/controles/flatDark09.png', 80, 80);
 
 
         game.load.spritesheet('rain','image/rain.png', 150,100);
