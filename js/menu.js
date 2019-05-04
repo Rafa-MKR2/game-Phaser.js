@@ -43,17 +43,16 @@ console.log(porcentagem(10,window.innerWidth))
 
     game.add.button(
       porcentagem(70,window.innerWidth),
-      porcentagem(70,window.innerHeight), 'buttonA', actionOnClick, this, 4, 2, 0);
+      porcentagem(70,window.innerHeight), 'buttonA', this.confirmar, this, 4, 2, 0);
 
     
       game.add.button(
         porcentagem(85,window.innerWidth),
         porcentagem(70,window.innerHeight), 'buttonB', actionOnClick, this, 4, 2, 0);
-  
 
       game.add.button(
         porcentagem(10,window.innerWidth),
-        porcentagem(50,window.innerHeight), 'buttonUp', actionOnClick, this, 4, 2, 0);
+        porcentagem(50,window.innerHeight), 'buttonUp', up, this, 4, 2, 0);
       
        game.add.button(
           porcentagem(15,window.innerWidth),
@@ -65,7 +64,7 @@ console.log(porcentagem(10,window.innerWidth))
        
         game.add.button(
               porcentagem(10,window.innerWidth),
-              porcentagem(75,window.innerHeight), 'buttonDown', actionOnClick, this, 4, 2, 0);
+              porcentagem(75,window.innerHeight), 'buttonDown', down, this, 4, 2, 0);
         
 
     function actionOnClick () {
