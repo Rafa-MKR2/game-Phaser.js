@@ -11,9 +11,20 @@ create:function() {
       
 console.log(porcentagem(10,window.innerWidth))
 
-    this.NewGame = game.add.text(400,220, 'Novo Game', {font: GameConfig.textFont, fill:'#fff'});
-    this.record = game.add.text(400,270, 'Recordes', {font: GameConfig.textFont, fill:'#fff'});
-    this.option = game.add.text(400,320, 'Options', {font: GameConfig.textFont, fill:'#fff'});
+    this.NewGame = game.add.text(
+      porcentagem(35,window.innerWidth),
+      porcentagem(35,window.innerHeight)
+      , 'Novo Game', {font: GameConfig.textFont, fill:'#fff'});
+    
+      this.record = game.add.text(
+      porcentagem(35,window.innerWidth),
+      porcentagem(50,window.innerHeight),
+     'Recordes', {font: GameConfig.textFont, fill:'#fff'});
+
+    this.option = game.add.text(
+      porcentagem(35,window.innerWidth),
+      porcentagem(65,window.innerHeight),
+     'Options', {font: GameConfig.textFont, fill:'#fff'});
 
     this.menu = [this.NewGame,this.record,this.option];
     this.select = 0;
