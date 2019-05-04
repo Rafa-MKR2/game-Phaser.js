@@ -41,12 +41,6 @@ console.log(porcentagem(10,window.innerWidth))
     this.enter.onDown.add(this.confirmar, this);
 
 
-    game.add.button(200, 500, 'buttonA', actionOnClick, this, 4, 2, 0);
-    game.add.button(250, 500, 'buttonB', actionOnClick, this, 5, 5, 0);
-    game.add.button(350, 500, 'buttonX', actionOnClick, this, 5, 5, 0);
-    game.add.button(400, 500, 'buttonY', actionOnClick, this, 5, 5, 0);
-
-
     function actionOnClick () {
 
     console.log('teste')

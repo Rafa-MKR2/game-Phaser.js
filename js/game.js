@@ -16,10 +16,10 @@ var GameConfig ={
 
 if(window.innerHeight<=360 && window.innerWidth<=740){
 
-    GameConfig.height = 360;
-    GameConfig.width = 740;
-    GameConfig.titleFont = '30px'
-    GameConfig.textFont ='10px'
+    GameConfig.height =window.innerHeight;
+    GameConfig.width =  window.innerWidth ;
+    GameConfig.titleFont = '60px'
+    GameConfig.textFont ='40px'
 
 }
 

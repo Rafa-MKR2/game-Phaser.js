@@ -6,7 +6,9 @@ Loading = {
  
         var printLoad =[];
         var letterNumb= 0;
-        var textLoadPosition = game.add.text(700,540,'',{font:'40px ', fill:'#fff' });
+        var textLoadPosition = game.add.text(
+          porcentagem(65,window.innerWidth),
+          porcentagem(80,window.innerHeight),'',{font:'40px ', fill:'#fff' });
         var CharateresArray = ['L','O','A','D','I','N','G','.','.','.'];
     
     
