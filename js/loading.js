@@ -36,7 +36,10 @@ Loading = {
         game.load.audio('explosionStart', './sfx/synthetic_explosion_1.mp3');
 
         
-        game.load.spritesheet('button', 'image/controles/flatDark35.png', 80, 80);
+        game.load.spritesheet('buttonA', 'image/controles/flatDark35.png', 80, 80);
+        game.load.spritesheet('buttonB', 'image/controles/flatDark36.png', 80, 80);
+        game.load.spritesheet('buttonX', 'image/controles/flatDark37.png', 80, 80);
+        game.load.spritesheet('buttonY', 'image/controles/flatDark38.png', 80, 80);
 
 
         game.load.spritesheet('rain','image/rain.png', 150,100);

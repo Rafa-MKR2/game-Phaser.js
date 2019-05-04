@@ -352,7 +352,7 @@ Stage1 = {
            game.physics.arcade.moveToPointer(bullet,4500);
    
            var songShoting = game.add.audio('oneshot');
-               songShoting.volume = .7;
+               songShoting.volume = .2;
                songShoting.play()
 
         
@@ -396,7 +396,7 @@ blood :  function(){
         console.log(this.enemy1.life);
         var explosion = this.explosions.getFirstExists(false);
         explosion.reset(this.enemy1.animation.x, this.enemy1.animation.y);
-        explosion.play('blood', 30, true, true);
+        explosion.play('blood', 10, true, true);
     
         setTimeout(function(){ explosion.kill()},5000)
     }

@@ -5,13 +5,15 @@ Menu={
 
 create:function() {
 
-    game.add.text(220,100, 'Midnight Shadow', {font:'60px ', fill:'#fff'});
+    game.add.text(
+      porcentagem(15,window.innerWidth),
+      porcentagem(10,window.innerHeight), 'Midnight Shadow', {font: GameConfig.titleFont, fill:'#fff'});
       
+console.log(porcentagem(10,window.innerWidth))
 
-
-    this.NewGame = game.add.text(400,220, 'Novo Game', {font:'40px ', fill:'#fff'});
-    this.record = game.add.text(400,270, 'Recordes', {font:'40px ', fill:'#fff'});
-    this.option = game.add.text(400,320, 'Options', {font:'40px ', fill:'#fff'});
+    this.NewGame = game.add.text(400,220, 'Novo Game', {font: GameConfig.textFont, fill:'#fff'});
+    this.record = game.add.text(400,270, 'Recordes', {font: GameConfig.textFont, fill:'#fff'});
+    this.option = game.add.text(400,320, 'Options', {font: GameConfig.textFont, fill:'#fff'});
 
     this.menu = [this.NewGame,this.record,this.option];
     this.select = 0;
@@ -27,9 +29,11 @@ create:function() {
     this.enter = game.input.keyboard.addKey(Phaser.Keyboard.ENTER);
     this.enter.onDown.add(this.confirmar, this);
 
-        
 
-    game.add.button(game.world.centerX - 95, 500, 'button', actionOnClick, this, 5, 5, 0);
+    game.add.button(200, 500, 'buttonA', actionOnClick, this, 4, 2, 0);
+    game.add.button(250, 500, 'buttonB', actionOnClick, this, 5, 5, 0);
+    game.add.button(350, 500, 'buttonX', actionOnClick, this, 5, 5, 0);
+    game.add.button(400, 500, 'buttonY', actionOnClick, this, 5, 5, 0);
 
 
     function actionOnClick () {

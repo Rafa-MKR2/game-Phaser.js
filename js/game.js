@@ -1,8 +1,30 @@
 
-console.log(window.innerHeight)
+function porcentagem(percent,valor){
 
+    var resultado = (percent / 100 ) * valor;
 
-var game = new Phaser.Game(960, 600, Phaser.CANVAS, 'gamecontainer');
+    return resultado
+}
+
+var GameConfig ={
+    height : 600,
+    width : 960,
+    titleFont :  '60px',
+    textFont :  '40px'
+    
+}
+
+if(window.innerHeight<=360 && window.innerWidth<=740){
+
+    GameConfig.height = 360;
+    GameConfig.width = 740;
+    GameConfig.titleFont = '30px'
+    GameConfig.textFont ='10px'
+
+}
+
+var game = new Phaser.Game(GameConfig.width, GameConfig.height, Phaser.CANVAS, 'gamecontainer');
+
 
 // musica golbal
 var music;
@@ -14,7 +36,7 @@ document.querySelector('#gamecontainer').style.cursor = 'crosshair';
     game.state.add('recordes',Recordes)
     game.state.add('options',Options)
 
-     game.state.add('stage1',Stage1)
+    game.state.add('stage1',Stage1)
 
     // inicia carregamento
     game.state.start("LoadingState")
