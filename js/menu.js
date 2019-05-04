@@ -73,6 +73,8 @@ console.log(porcentagem(10,window.innerWidth))
   
   }
     function up(){
+      alert('cima')
+
         this.select = this.select-1;
 
         if(this.select<0){
@@ -83,6 +85,7 @@ console.log(porcentagem(10,window.innerWidth))
     }
 
     function down(){
+      alert('baixo')
         this.select=  this.select+1;
 
         if(this.select>2) {
