@@ -21,13 +21,13 @@ var GameConfig ={
 if(window.innerHeight<=360 && window.innerWidth<=740  ||
    window.innerHeight<=360 && window.innerWidth<=640  || 
    window.innerHeight<=384 && window.innerWidth<=640  ||
+   window.innerHeight<=279 && window.innerWidth<=640  ||
    window.innerHeight<=414 && window.innerWidth<=736){
 
     GameConfig.height =window.innerHeight;
     GameConfig.width =  window.innerWidth;
     GameConfig.mobile = true;
 }
-alert(window.innerHeight +'x'+window.innerWidth)
 
 var game = new Phaser.Game(GameConfig.width, GameConfig.height, Phaser.CANVAS, 'gamecontainer');
 
