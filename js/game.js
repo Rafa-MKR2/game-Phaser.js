@@ -10,21 +10,23 @@ var GameConfig ={
     height : 600,
     width : 960,
     titleFont :  '60px',
-    textFont :  '40px'
+    textFont :  '40px',
+
+    mobile  : false
     
 }
 
 
 
 if(window.innerHeight<=360 && window.innerWidth<=740  ||
-    window.innerHeight<=360 && window.innerWidth<=640 || 
+   window.innerHeight<=360 && window.innerWidth<=640  || 
    window.innerHeight<=384 && window.innerWidth<=640  ||
    window.innerHeight<=414 && window.innerWidth<=736){
 
     GameConfig.height =window.innerHeight;
     GameConfig.width =  window.innerWidth;
-    GameConfig.titleFont = '60px'
-    GameConfig.textFont ='40px'
+    GameConfig.mobile = true;
+    alert(window.innerHeight +'x'+window.innerWidth)
 }
 
 var game = new Phaser.Game(GameConfig.width, GameConfig.height, Phaser.CANVAS, 'gamecontainer');

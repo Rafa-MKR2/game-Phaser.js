@@ -41,35 +41,34 @@ console.log(porcentagem(10,window.innerWidth))
     this.enter.onDown.add(this.confirmar, this);
 
 
+  
+  if(GameConfig.mobile===true){
     game.add.button(
       porcentagem(70,window.innerWidth),
       porcentagem(70,window.innerHeight), 'buttonA', this.confirmar, this, 4, 2, 0);
 
-    
       game.add.button(
         porcentagem(85,window.innerWidth),
         porcentagem(70,window.innerHeight), 'buttonB', actionOnClick, this, 1, 1, 0);
-
-
-
 
      game.add.button(
         porcentagem(10,window.innerWidth),
         porcentagem(50,window.innerHeight), 'buttonUp', this.upSeleciona,this);
 
-      game.add.button(
+     game.add.button(
           porcentagem(15,window.innerWidth),
           porcentagem(65,window.innerHeight), 'buttonRight', actionOnClick,this);
        
-      game.add.button(
+     game.add.button(
             porcentagem(3,window.innerWidth),
             porcentagem(65,window.innerHeight), 'buttonLeft', actionOnClick, this);
        
-      game.add.button(
+     game.add.button(
               porcentagem(10,window.innerWidth),
               porcentagem(75,window.innerHeight), 'buttonDown',this.downSeleciona, this)
-             
-
+          
+    }
+    
     function actionOnClick () {
 
     console.log('teste')
