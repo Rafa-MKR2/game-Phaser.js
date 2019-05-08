@@ -1,6 +1,6 @@
 
 function porcentagem(percent,valor){
-
+ 
     var resultado = (percent / 100 ) * valor;
 
     return resultado
@@ -14,13 +14,17 @@ var GameConfig ={
     
 }
 
-if(window.innerHeight<=360 && window.innerWidth<=740){
+
+
+if(window.innerHeight<=360 && window.innerWidth<=740  ||
+    window.innerHeight<=360 && window.innerWidth<=640 || 
+   window.innerHeight<=384 && window.innerWidth<=640  ||
+   window.innerHeight<=414 && window.innerWidth<=736){
 
     GameConfig.height =window.innerHeight;
-    GameConfig.width =  window.innerWidth ;
+    GameConfig.width =  window.innerWidth;
     GameConfig.titleFont = '60px'
     GameConfig.textFont ='40px'
-
 }
 
 var game = new Phaser.Game(GameConfig.width, GameConfig.height, Phaser.CANVAS, 'gamecontainer');
