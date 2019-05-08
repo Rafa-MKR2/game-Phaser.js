@@ -22,6 +22,7 @@ if(window.innerHeight<=360 && window.innerWidth<=740  ||
    window.innerHeight<=360 && window.innerWidth<=640  || 
    window.innerHeight<=384 && window.innerWidth<=640  ||
    window.innerHeight<=279 && window.innerWidth<=640  ||
+   window.innerHeight<=427 && window.innerWidth<=980 ||
    window.innerHeight<=414 && window.innerWidth<=736){
 
     GameConfig.height =window.innerHeight;
