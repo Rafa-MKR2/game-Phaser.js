@@ -26,8 +26,8 @@ if(window.innerHeight<=360 && window.innerWidth<=740  ||
     GameConfig.height =window.innerHeight;
     GameConfig.width =  window.innerWidth;
     GameConfig.mobile = true;
-    alert(window.innerHeight +'x'+window.innerWidth)
 }
+alert(window.innerHeight +'x'+window.innerWidth)
 
 var game = new Phaser.Game(GameConfig.width, GameConfig.height, Phaser.CANVAS, 'gamecontainer');
 
