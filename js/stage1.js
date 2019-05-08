@@ -17,7 +17,9 @@ Stage1 = {
        sartSound.play()
       
    
-
+       
+        
+        
        
        this.player;
 
@@ -47,6 +49,9 @@ Stage1 = {
        this.P = game.input.keyboard.addKey(Phaser.Keyboard.P); 
        this.P.onDown.add(this.pause, this);
 
+       this.explosions = game.add.group();
+       this.explosions.createMultiple(30, 'blood');
+   
 
         // player e camera
         this.enemy1 = this.EnemyFactory(875,75,'RIGHT', 'zumbie1')
@@ -59,11 +64,9 @@ Stage1 = {
         game.physics.arcade.enable(this.enemy3);
 
 
-       this.explosions = game.add.group();
-       this.explosions.createMultiple(30, 'blood');
-   
+      
 
-       this.player = game.add.sprite(400, 400, 'player');
+       this.player = game.add.sprite(900, 700, 'player');
        game.add.tileSprite(0, 0, 2000, 2000, 'noite');
 
   
@@ -71,7 +74,7 @@ Stage1 = {
 
        game.physics.startSystem(Phaser.Physics.P2JS);
        game.camera.follow(this.player);
-       game.camera.deadzone = new Phaser.Rectangle(300, 300, 200, 200);
+       game.camera.deadzone = new Phaser.Rectangle(150, 150, 450, 100);
        
    
        this.maze = [
@@ -180,6 +183,67 @@ Stage1 = {
            this.pauseText =  game.add.text(330,220,'', {font:'50px ', fill:'#fff'});
            this.pauseText.fixedToCamera=true;
 
+
+
+        function walkUp(){
+            this.player.body.velocity.y = -200;
+            this.player.direction = "up";
+        }
+        function walkDown(){
+            this.player.body.velocity.y = 200;
+            this.player.direction = "down";
+        }
+        function walkRight(){
+            
+            this.player.body.velocity.x =200;
+            this.player.direction = "right";
+        }
+        function walkLeft(){
+            this.player.body.velocity.x = -200;
+            this.player.direction = "left";
+        }
+    
+    
+
+           if(GameConfig.mobile==true){
+            game.add.button(
+              porcentagem(70,window.innerWidth),
+              porcentagem(70,window.innerHeight), 'buttonA', null, this, 4, 2, 0)
+              .fixedToCamera=true;
+
+        
+              game.add.button(
+                porcentagem(85,window.innerWidth),
+                porcentagem(70,window.innerHeight), 'buttonB', this.voltarAoMenu, this, 1, 1, 0)
+                .fixedToCamera=true;
+
+        
+             game.add.button(
+                porcentagem(10,window.innerWidth),
+                porcentagem(50,window.innerHeight), 'buttonUp', walkUp,this)
+                .fixedToCamera=true;
+
+        
+             game.add.button(
+                  porcentagem(15,window.innerWidth),
+                  porcentagem(65,window.innerHeight), 'buttonRight', walkRight,this)
+                  .fixedToCamera=true;
+
+               
+             game.add.button(
+                    porcentagem(3,window.innerWidth),
+                    porcentagem(65,window.innerHeight), 'buttonLeft', walkLeft, this)
+                    .fixedToCamera=true;
+
+               
+             game.add.button(
+                      porcentagem(10,window.innerWidth),
+                      porcentagem(75,window.innerHeight), 'buttonDown',walkDown, this)
+                      .fixedToCamera=true;
+
+                  
+            }
+
    },
    
     update: function() {
@@ -234,6 +298,7 @@ Stage1 = {
     this.moveEnemy(this.enemy3.animation)   
 
 
+  
     //impede personagem de andar atirando...
     if(!this.input.mousePointer.isDown){
     
