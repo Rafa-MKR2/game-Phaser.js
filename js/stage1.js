@@ -202,7 +202,17 @@ Stage1 = {
         
             this.btnUp = game.add.button(
                         porcentagem(10,window.innerWidth),
-                        porcentagem(50,window.innerHeight), 'buttonUp', null,this, 4, 3, 5);
+                        porcentagem(50,window.innerHeight), 'buttonUp', function(){
+                           
+                            this.btnUp.onInputDown.add(function(){
+                                this.controls.up.isDown =true;
+                            }, this);
+
+                            this.btnUp.onInputOut.add(function(){
+                                this.controls.up.isDown =false;
+                            }, this);
+                    
+                        },this, 4, 3, 5);
                         this.btnUp.fixedToCamera=true;
 
         
@@ -226,25 +236,12 @@ Stage1 = {
                   
             }
 
-
-
-   },
-   
-    update: function() {
-
-        this.btnA.onInputOver.add(function(){ }, this);
-
-        this.btnB.onInputOver.add(function(){ }, this);
-
-        // Mobile controle Up
-        this.btnUp.onInputOver.add(function(){
-            this.controls.up.isDown =true;
-        }, this);
-
-        this.btnUp.onInputOut.add(function(){
-            this.controls.up.isDown =false;
-        }, this);
-
+            game.input.addPointer();
+            game.input.addPointer();
+            game.input.addPointer();
+            game.input.addPointer();
+        
+       
         // Mobile controle Left
         this.btnLeft.onInputOver.add(function(){
             this.controls.left.isDown =true;
@@ -272,6 +269,18 @@ Stage1 = {
             this.controls.down.isDown =false;
         }, this);
 
+    
+
+
+   },
+   
+    update: function() {
+
+        this.btnA.onInputOver.add(function(){ }, this);
+
+        this.btnB.onInputOver.add(function(){ }, this);
+
+      
 
 
        this.player.body.velocity.x = 0;
@@ -291,34 +300,7 @@ Stage1 = {
         this.S = game.input.keyboard.addKey(Phaser.Keyboard.S);
         this.D = game.input.keyboard.addKey(Phaser.Keyboard.D); 
 
-     
-
-    if (game.input.mousePointer.isDown){
-        // captura rotação do mouser arredonda pra baixo  
-        var direct = Math.floor(Math.round(game.physics.arcade.angleToPointer(this.player)))
-      
-      if( direct==3 || direct==-3){
-        this.player.direction = "shotingLeft";
-        this.fire(-20,-5);
-
-      }else
-      if(direct==0){
-        this.player.direction = "shotingRight";
-        this.fire(10,0);
-
-        }else
-
-      if(direct<0){
-        this.player.direction = "shotingUp";
-        this.fire(-7,-30);
-
-      }else if(direct>0){
-        this.player.direction = "shotingDown";
-        this.fire(-5,20);
-
-      }
-    }
-  
+    
 
     this.moveEnemy(this.enemy1.animation)   
     this.moveEnemy(this.enemy2.animation)   
