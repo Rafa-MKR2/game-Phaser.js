@@ -6,10 +6,11 @@ Menu={
 create:function() {
 
     game.add.text(
-      porcentagem(15,window.innerWidth),
-      porcentagem(10,window.innerHeight), 'Midnight Shadow', {font: GameConfig.titleFont, fill:'#fff'});
+      game.world.centerX,
+      porcentagem(20,window.innerHeight), 'Midnight Shadow', {font: GameConfig.titleFont, fill:'#fff'})
+      .anchor.set(.5)
+
       
-console.log(porcentagem(10,window.innerWidth))
 
     this.NewGame = game.add.text(
       porcentagem(35,window.innerWidth),
@@ -109,11 +110,10 @@ console.log(porcentagem(10,window.innerWidth))
     },
 
     confirmar : function(){
-    console.log('teste confirme')
       var selecione = this.menu[this.select].text;
       if(selecione=='Novo Game'){
       
-        music.pause();
+      
         return game.state.start('stage1');
 
       }else if(selecione=='Recordes'){

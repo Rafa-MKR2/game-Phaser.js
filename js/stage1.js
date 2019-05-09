@@ -7,7 +7,7 @@ Stage1 = {
     create: function() {
    
       
-       music =  game.add.audio('welcome')
+   var music =  game.add.audio('welcome')
        music.loop = true;
        music.volume = .1;
        music.play();
@@ -191,7 +191,7 @@ Stage1 = {
 
     
     
-
+           
            if(GameConfig.mobile==true){
            this.btnA = game.add.button(
                         porcentagem(70,window.innerWidth),

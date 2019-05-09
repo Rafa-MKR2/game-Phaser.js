@@ -32,10 +32,6 @@ if(window.innerHeight<=360 && window.innerWidth<=740  ||
 
 var game = new Phaser.Game(GameConfig.width, GameConfig.height, Phaser.CANVAS, 'gamecontainer');
 
-
-// musica golbal
-var music;
-
 document.querySelector('#gamecontainer').style.cursor = 'crosshair';
 
     game.state.add('boot',bootState)

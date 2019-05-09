@@ -1,7 +1,13 @@
-
-
+var loadingMusic;
 Loading = {
    preload: function() {
+
+     
+
+    loadingMusic = game.add.audio('loading')
+    loadingMusic.loop = true;
+    loadingMusic.volume = .6;
+    loadingMusic.play();
 
 
     game.add.sprite(game.world.centerX,100,'bg')
@@ -21,7 +27,6 @@ Loading = {
 
      
         
-        game.load.audio('lavender', './sfx/menu/Loading.wav'); 
         game.load.audio('welcome', './sfx/Kim Lightyear - Braindead.mp3');
         game.load.audio('oneshot', './sfx/oneShot.mp3');
         game.load.audio('reload', './sfx/9mm Clip Load.mp3');
@@ -77,17 +82,15 @@ Loading = {
     
     create: function() {
     
-        
-      music = game.add.audio('lavender')
-      music.loop = true;
-      music.volume = .5;
-      music.play();
-    
+   
      
         // chama menu
           setTimeout(function(){
             game.state.start("menu")
-          },500)
+            loadingMusic.stop();
+
+
+          },1500)
       
     }
 }
