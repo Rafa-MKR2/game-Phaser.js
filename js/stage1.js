@@ -236,22 +236,40 @@ Stage1 = {
 
         this.btnB.onInputOver.add(function(){ }, this);
 
+        // Mobile controle Up
         this.btnUp.onInputOver.add(function(){
-            this.player.body.velocity.y = -200;
-            this.player.direction = "up";
-           
+            this.controls.up.isDown =true;
         }, this);
+
+        this.btnUp.onInputOut.add(function(){
+            this.controls.up.isDown =false;
+        }, this);
+
+        // Mobile controle Left
         this.btnLeft.onInputOver.add(function(){
-            this.player.body.velocity.x = -200;
-            this.player.direction = "left";
+            this.controls.left.isDown =true;
         }, this);
+
+        this.btnLeft.onInputOut.add(function(){
+            this.controls.left.isDown =false;
+        }, this);
+
+        // Mobile controle right
         this.btnRight.onInputOver.add(function(){
-            this.player.body.velocity.x = +200;
-            this.player.direction = "right";
+            this.controls.right.isDown =true;
         }, this);
+
+        this.btnRight.onInputOut.add(function(){
+            this.controls.right.isDown =false;
+        }, this);
+
+        // Mobile controle down
         this.btnDown.onInputOver.add(function(){
-            this.player.body.velocity.y = +200;
-            this.player.direction = "down";
+            this.controls.down.isDown =true;
+        }, this);
+
+        this.btnDown.onInputOut.add(function(){
+            this.controls.down.isDown =false;
         }, this);
 
 
@@ -314,8 +332,7 @@ Stage1 = {
         // player movimento
        if(this.controls.left.isDown &&
          !this.controls.right.isDown ||
-         this.A.isDown && !this.D.isDown ||
-         this.btnLeft.onInputOver && !this.btnRight.onInputOver){
+         this.A.isDown && !this.D.isDown){
 
         this.player.body.velocity.x = -200;
         this.player.direction = "left";
