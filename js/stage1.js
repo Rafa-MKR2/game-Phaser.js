@@ -74,7 +74,7 @@ Stage1 = {
 
        game.physics.startSystem(Phaser.Physics.P2JS);
        game.camera.follow(this.player);
-       game.camera.deadzone = new Phaser.Rectangle(150, 150, 450, 100);
+       game.camera.deadzone = new Phaser.Rectangle(250, 100, 350, 100);
        
    
        this.maze = [
@@ -185,60 +185,47 @@ Stage1 = {
 
 
 
-        function walkUp(){
-            this.player.body.velocity.y = -200;
-            this.player.direction = "up";
-        }
-        function walkDown(){
-            this.player.body.velocity.y = 200;
-            this.player.direction = "down";
-        }
-        function walkRight(){
-            
-            this.player.body.velocity.x =200;
-            this.player.direction = "right";
-        }
-        function walkLeft(){
-            this.player.body.velocity.x = -200;
-            this.player.direction = "left";
-        }
     
     
 
            if(GameConfig.mobile==true){
-            game.add.button(
+           game.add.button(
               porcentagem(70,window.innerWidth),
-              porcentagem(70,window.innerHeight), 'buttonA', null, this, 4, 2, 0)
+              porcentagem(70,window.innerHeight), 'buttonA',actionOnClick, this, 1, 0, 2)
               .fixedToCamera=true;
 
-        
+function actionOnClick () {
+    
+
+}
+
               game.add.button(
                 porcentagem(85,window.innerWidth),
-                porcentagem(70,window.innerHeight), 'buttonB', this.voltarAoMenu, this, 1, 1, 0)
+                porcentagem(70,window.innerHeight), 'buttonB', null, this,4, 3, 5)
                 .fixedToCamera=true;
 
         
              game.add.button(
                 porcentagem(10,window.innerWidth),
-                porcentagem(50,window.innerHeight), 'buttonUp', walkUp,this)
+                porcentagem(50,window.innerHeight), 'buttonUp', this.walkUp,this, 4, 3, 5)
                 .fixedToCamera=true;
 
         
              game.add.button(
                   porcentagem(15,window.innerWidth),
-                  porcentagem(65,window.innerHeight), 'buttonRight', walkRight,this)
+                  porcentagem(65,window.innerHeight), 'buttonRight',  this.walkRight,this,4, 3, 5)
                   .fixedToCamera=true;
 
                
              game.add.button(
                     porcentagem(3,window.innerWidth),
-                    porcentagem(65,window.innerHeight), 'buttonLeft', walkLeft, this)
+                    porcentagem(65,window.innerHeight), 'buttonLeft', null, this,4, 3, 5)
                     .fixedToCamera=true;
 
                
              game.add.button(
                       porcentagem(10,window.innerWidth),
-                      porcentagem(75,window.innerHeight), 'buttonDown',walkDown, this)
+                      porcentagem(75,window.innerHeight), 'buttonDown',this.walkDown, this,4, 3, 5)
                       .fixedToCamera=true;
 
                   
@@ -247,6 +234,25 @@ Stage1 = {
    },
    
     update: function() {
+
+         this.walkUp= function(){
+            this.player.body.velocity.y = -200;
+            this.player.direction = "up";
+        }
+        this.walkDown=function(){
+            this.player.body.velocity.y = 200;
+            this.player.direction = "down";
+        }
+     this.walkRight= function(){
+            
+            this.player.body.velocity.x =200;
+            this.player.direction = "right";
+        }
+    this. walkLeft= function(){
+            this.player.body.velocity.x = -200;
+            this.player.direction = "left";
+        }
+
        this.player.body.velocity.x = 0;
        this.player.body.velocity.y = 0;
 

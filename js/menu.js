@@ -42,7 +42,7 @@ console.log(porcentagem(10,window.innerWidth))
 
 
   
-  if(GameConfig.mobile===true){
+  if(GameConfig.mobile==true){
     game.add.button(
       porcentagem(70,window.innerWidth),
       porcentagem(70,window.innerHeight), 'buttonA', this.confirmar, this, 4, 2, 0);

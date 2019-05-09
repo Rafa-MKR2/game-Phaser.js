@@ -38,6 +38,7 @@ var music;
 
 document.querySelector('#gamecontainer').style.cursor = 'crosshair';
 
+    game.state.add('boot',bootState)
     game.state.add('LoadingState',Loading)
     game.state.add('menu',Menu)
     game.state.add('recordes',Recordes)
@@ -46,4 +47,4 @@ document.querySelector('#gamecontainer').style.cursor = 'crosshair';
     game.state.add('stage1',Stage1)
 
     // inicia carregamento
-    game.state.start("LoadingState")
+    game.state.start("boot")
