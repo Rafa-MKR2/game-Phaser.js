@@ -87,7 +87,7 @@ Loading = {
         // chama menu
           setTimeout(function(){
             game.state.start("menu")
-          },5500)
+          },500)
       
     }
 }

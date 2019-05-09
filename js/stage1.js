@@ -189,69 +189,72 @@ Stage1 = {
     
 
            if(GameConfig.mobile==true){
-           game.add.button(
-              porcentagem(70,window.innerWidth),
-              porcentagem(70,window.innerHeight), 'buttonA',actionOnClick, this, 1, 0, 2)
-              .fixedToCamera=true;
+           this.btnA = game.add.button(
+                        porcentagem(70,window.innerWidth),
+                        porcentagem(70,window.innerHeight), 'buttonA',null, this, 1, 0, 2);
+                        this.btnA.fixedToCamera=true;
 
-function actionOnClick () {
-    
-
-}
-
-              game.add.button(
-                porcentagem(85,window.innerWidth),
-                porcentagem(70,window.innerHeight), 'buttonB', null, this,4, 3, 5)
-                .fixedToCamera=true;
+            this.btnB = game.add.button(
+                        porcentagem(85,window.innerWidth),
+                        porcentagem(70,window.innerHeight), 'buttonB', null, this,4, 3, 5);
+                        this.btnB.fixedToCamera=true;
 
         
-             game.add.button(
-                porcentagem(10,window.innerWidth),
-                porcentagem(50,window.innerHeight), 'buttonUp', this.walkUp,this, 4, 3, 5)
-                .fixedToCamera=true;
+            this.btnUp = game.add.button(
+                        porcentagem(10,window.innerWidth),
+                        porcentagem(50,window.innerHeight), 'buttonUp', null,this, 4, 3, 5);
+                        this.btnUp.fixedToCamera=true;
 
         
-             game.add.button(
-                  porcentagem(15,window.innerWidth),
-                  porcentagem(65,window.innerHeight), 'buttonRight',  this.walkRight,this,4, 3, 5)
-                  .fixedToCamera=true;
+            this.btnRight = game.add.button(
+                        porcentagem(15,window.innerWidth),
+                        porcentagem(65,window.innerHeight), 'buttonRight',  null,this,4, 3, 5);
+                        this.btnRight.fixedToCamera=true;
 
                
-             game.add.button(
-                    porcentagem(3,window.innerWidth),
-                    porcentagem(65,window.innerHeight), 'buttonLeft', null, this,4, 3, 5)
-                    .fixedToCamera=true;
+            this.btnLeft = game.add.button(
+                        porcentagem(3,window.innerWidth),
+                        porcentagem(65,window.innerHeight), 'buttonLeft', null, this,4, 3, 5);
+                        this.btnLeft.fixedToCamera=true;
 
                
-             game.add.button(
-                      porcentagem(10,window.innerWidth),
-                      porcentagem(75,window.innerHeight), 'buttonDown',this.walkDown, this,4, 3, 5)
-                      .fixedToCamera=true;
+             this.btnDown =  game.add.button(
+                        porcentagem(10,window.innerWidth),
+                        porcentagem(75,window.innerHeight), 'buttonDown',null, this,4, 3, 5);
+                        this.btnDown.fixedToCamera=true;
 
                   
             }
+
+
 
    },
    
     update: function() {
 
-         this.walkUp= function(){
+        this.btnA.onInputOver.add(function(){ }, this);
+
+        this.btnB.onInputOver.add(function(){ }, this);
+
+        this.btnUp.onInputOver.add(function(){
             this.player.body.velocity.y = -200;
             this.player.direction = "up";
-        }
-        this.walkDown=function(){
-            this.player.body.velocity.y = 200;
-            this.player.direction = "down";
-        }
-     this.walkRight= function(){
-            
-            this.player.body.velocity.x =200;
-            this.player.direction = "right";
-        }
-    this. walkLeft= function(){
+           
+        }, this);
+        this.btnLeft.onInputOver.add(function(){
             this.player.body.velocity.x = -200;
             this.player.direction = "left";
-        }
+        }, this);
+        this.btnRight.onInputOver.add(function(){
+            this.player.body.velocity.x = +200;
+            this.player.direction = "right";
+        }, this);
+        this.btnDown.onInputOver.add(function(){
+            this.player.body.velocity.y = +200;
+            this.player.direction = "down";
+        }, this);
+
+
 
        this.player.body.velocity.x = 0;
        this.player.body.velocity.y = 0;
@@ -311,7 +314,8 @@ function actionOnClick () {
         // player movimento
        if(this.controls.left.isDown &&
          !this.controls.right.isDown ||
-         this.A.isDown && !this.D.isDown){
+         this.A.isDown && !this.D.isDown ||
+         this.btnLeft.onInputOver && !this.btnRight.onInputOver){
 
         this.player.body.velocity.x = -200;
         this.player.direction = "left";
@@ -340,7 +344,7 @@ function actionOnClick () {
         this.player.body.velocity.y = 200;
         this.player.direction = "down";
     }
-    }
+}
       
    
        switch(this.player.direction){ 
