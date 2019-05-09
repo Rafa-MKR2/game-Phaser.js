@@ -206,13 +206,10 @@ Stage1 = {
                         
                             this.btnUp.onInputDown.add(function(){
                                 this.controls.up.isDown =true;
-                                alert( this.controls.up.isDown)
                             }, this);
 
                             this.btnUp.onInputOut.add(function(){
                                 this.controls.up.isDown =false;
-                                alert( this.controls.up.isDown)
-
                             }, this);
                     
                         },this, 4, 3, 5);
