@@ -212,7 +212,7 @@ Stage1 = {
                                 this.controls.up.isDown =true;
                             }, this);
 
-                            this.btnUp.onInputOut.add(function(){
+                            this.btnUp.onInputUp.add(function(){
                                 this.controls.up.isDown =false;
                             }, this);
                     
@@ -222,19 +222,50 @@ Stage1 = {
         
             this.btnRight = game.add.button(
                         porcentagem(15,window.innerWidth),
-                        porcentagem(65,window.innerHeight), 'buttonRight',  null,this,4, 3, 5);
+                        porcentagem(65,window.innerHeight), 'buttonRight',  
+                        function(){
+                        
+                            this.btnRight.onInputDown.add(function(){
+                                this.controls.right.isDown =true;
+                            }, this);
+
+                            this.btnRight.onInputUp.add(function(){
+                                this.controls.right.isDown =false;
+                            }, this);
+                    
+                        },this,4, 3, 5);
                         this.btnRight.fixedToCamera=true;
 
                
             this.btnLeft = game.add.button(
                         porcentagem(3,window.innerWidth),
-                        porcentagem(65,window.innerHeight), 'buttonLeft', null, this,4, 3, 5);
+                        porcentagem(65,window.innerHeight), 'buttonLeft', function(){
+                        
+                            this.btnLeft.onInputDown.add(function(){
+                                this.controls.left.isDown =true;
+                            }, this);
+
+                            this.btnLeft.onInputUp.add(function(){
+                                this.controls.left.isDown =false;
+                            }, this);
+                    
+                        }, this,4, 3, 5);
                         this.btnLeft.fixedToCamera=true;
 
                
              this.btnDown =  game.add.button(
                         porcentagem(10,window.innerWidth),
-                        porcentagem(75,window.innerHeight), 'buttonDown',null, this,4, 3, 5);
+                        porcentagem(75,window.innerHeight), 'buttonDown',function(){
+                        
+                            this.btnDown.onInputDown.add(function(){
+                                this.controls.down.isDown =true;
+                            }, this);
+
+                            this.btnDown.onInputUp.add(function(){
+                                this.controls.down.isDown =false;
+                            }, this);
+                    
+                        }, this,4, 3, 5);
                         this.btnDown.fixedToCamera=true;
 
                   
@@ -242,33 +273,7 @@ Stage1 = {
 
           
         
-       
-        // Mobile controle Left
-        this.btnLeft.onInputOver.add(function(){
-            this.controls.left.isDown =true;
-        }, this);
-
-        this.btnLeft.onInputOut.add(function(){
-            this.controls.left.isDown =false;
-        }, this);
-
-        // Mobile controle right
-        this.btnRight.onInputOver.add(function(){
-            this.controls.right.isDown =true;
-        }, this);
-
-        this.btnRight.onInputOut.add(function(){
-            this.controls.right.isDown =false;
-        }, this);
-
-        // Mobile controle down
-        this.btnDown.onInputOver.add(function(){
-            this.controls.down.isDown =true;
-        }, this);
-
-        this.btnDown.onInputOut.add(function(){
-            this.controls.down.isDown =false;
-        }, this);
+      
 
     
 
