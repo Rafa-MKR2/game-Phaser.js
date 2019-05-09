@@ -16,8 +16,12 @@ Stage1 = {
        sartSound.volume = .1;
        sartSound.play()
       
-   
-       
+       game.input.addPointer();
+       game.input.addPointer();
+       game.input.addPointer();
+       game.input.addPointer();
+       game.input.addPointer();
+       game.input.addPointer();
         
         
        
@@ -236,10 +240,7 @@ Stage1 = {
                   
             }
 
-            game.input.addPointer();
-            game.input.addPointer();
-            game.input.addPointer();
-            game.input.addPointer();
+          
         
        
         // Mobile controle Left
