@@ -31,13 +31,7 @@ Loading = {
         game.load.audio('oneshot', './sfx/oneShot.mp3');
         game.load.audio('reload', './sfx/9mm Clip Load.mp3');
 
-        game.load.audio('zombiewalker1', './sfx/zombies/zombie-7.wav');
-        game.load.audio('zombiewalker2', './sfx/zombies/zombie-8.wav');
-        game.load.audio('zombiewalker3', './sfx/zombies/zombie-9.wav');
-        game.load.audio('zombiewalker4', './sfx/zombies/zombie-10.wav');
-        game.load.audio('zombiewalker5', './sfx/zombies/zombie-11.wav');
-        game.load.audio('zombiewalker6', './sfx/zombies/zombie-12.wav');
-
+     
         game.load.audio('explosionStart', './sfx/synthetic_explosion_1.mp3');
 
         
@@ -66,7 +60,7 @@ Loading = {
         game.load.spritesheet('zumbie2','image/zombie06.png', 32,48);
         game.load.spritesheet('zumbie3','image/zombie08.png', 32,48);
 
-
+        game.load.image('settingsBG','image/Settings/SettingsBG.png')
 
         game.load.image('noite','image/noite.png', 50,50);
 

@@ -12,6 +12,7 @@ Stage1 = {
        music.volume = .1;
        music.play();
 
+
        var sartSound = game.add.audio('explosionStart');
        sartSound.volume = .1;
        sartSound.play()
@@ -502,49 +503,7 @@ blood :  function(){
 
     return;
 },
-damageControll : function(){
 
-
-
-    var pain =Math.floor(Math.random() * 6)
-   switch(pain){
-       case 1:
-       var zumbie = game.add.audio('zombiewalker1');
-       zumbie.volume = .7;
-       zumbie.play();
-
-       break;
-
-       case 2:
-       var zumbie = game.add.audio('zombiewalker2');
-       zumbie.volume = .7;
-       zumbie.play()
-       break; 
-       
-       case 3:
-       var zumbie = game.add.audio('zombiewalker3');
-       zumbie.volume = .7;
-       zumbie.play()
-
-       break;
-       
-       case 4:
-       var zumbie = game.add.audio('zombiewalker4');
-       zumbie.volume = .7;
-       zumbie.play()
-
-       break; 
-       
-       case 5:
-       var zumbie = game.add.audio('zombiewalker5');
-       zumbie.volume = .7;
-       zumbie.play()
-
-       break;
-       
-   }
-   
- },
 
 // Controle de inimigos
 	EnemyFactory : function(posX,posY, direction, enemySprite){
@@ -573,46 +532,95 @@ moveEnemy: function(enemy){
 
     this.enemy = enemy;
 
-    if(Math.floor(this.enemy.x -25)%50 === 0 && Math.floor(this.enemy.y -25)%50 === 0){
+    if(Math.floor(this.enemy.x -25)%50 === 0 && 
+       Math.floor(this.enemy.y -25)%50 === 0){
+
         var enemyCol = Math.floor(this.enemy.x / 50);
         var enemyRow = Math.floor(this.enemy.y / 50);
         var validPath = [];
 
+        var Perserguir = function(){
             if(this.maze[enemyRow][enemyCol -1]  < 1 &&
-               this.enemy.direction !== 'RIGHT' &&
-               this.player.x < this.enemy.x){
-                
-                    validPath.push('LEFT');
-            }
-
-            if(this.maze[enemyRow][enemyCol +1] < 1 &&
-               this.enemy.direction !== 'LEFT' &&
-               this.player.x > this.enemy.x){
-
-                    validPath.push('RIGHT');
+                this.enemy.direction !== 'RIGHT' &&
+                this.player.x < this.enemy.x){
+             
+                 validPath.push('LEFT');
              }
+    
+             if(this.maze[enemyRow][enemyCol +1] < 1 &&
+                this.enemy.direction !== 'LEFT' &&
+                this.player.x > this.enemy.x){
+    
+                     validPath.push('RIGHT');
+              }
+         
+             if(this.maze[enemyRow - 1][enemyCol]  < 1 &&
+                this.enemy.direction !== 'DOWN' &&
+                this.player.y < this.enemy.y){
+    
+                 validPath.push('UP');
+             }
+         
+    
+             if(this.maze[enemyRow + 1][enemyCol]  < 1 &&
+                this.enemy.direction !== 'UP' &&
+                this.player.y > this.enemy.y){
+    
+                 validPath.push('DOWN');
+             }
+         
+          }.bind(this)
+
+
         
+        var patrulhandoArea = function(){
+            if(this.maze[enemyRow][enemyCol -1]  < 1 &&
+                this.enemy.direction !== 'RIGHT'){
+             
+                 validPath.push('LEFT');
+             }
+    
+             if(this.maze[enemyRow][enemyCol +1] < 1 &&
+                this.enemy.direction !== 'LEFT' ){
+    
+                     validPath.push('RIGHT');
+              }
+         
+             if(this.maze[enemyRow - 1][enemyCol]  < 1 &&
+                this.enemy.direction !== 'DOWN'){
+    
+                 validPath.push('UP');
+             }
+         
+    
+             if(this.maze[enemyRow + 1][enemyCol]  < 1 &&
+                this.enemy.direction !== 'UP'){
+    
+                 validPath.push('DOWN');
+             }
+         
+          }.bind(this)
 
 
-            if(this.maze[enemyRow - 1][enemyCol]  < 1 &&
-               this.enemy.direction !== 'DOWN' &&
-               this.player.y < this.enemy.y){
 
-                validPath.push('UP');
-            }
-        
+        // Logica do campo de visao dos inimigos
+        if(this.enemy.x-400 < this.player.x && 
+           this.enemy.x+400 >  this.player.x &&
+           this.enemy.y-400 < this.player.y &&
+           this.enemy.y+400 > this.player.y
+          ){
+            Perserguir()
+         
+            console.log('perseguindo vc')
 
-            if(this.maze[enemyRow + 1][enemyCol]  < 1 &&
-               this.enemy.direction !== 'UP' &&
-               this.player.y > this.enemy.y){
+        }else{
+            patrulhandoArea()
+            console.log('patrulhando')
 
-                validPath.push('DOWN');
-            }
-        
-
-      
+        }
 
         this.enemy.direction = validPath[Math.floor(Math.random() * validPath.length)];
+
     }
 
     switch(this.enemy.direction){

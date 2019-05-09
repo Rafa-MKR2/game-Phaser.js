@@ -4,15 +4,7 @@ Options = {
     game.add.text(game.world.centerX,20, 'Opções de Jogo', {font:'40px ', fill:'#fff'})
     .anchor.set(.5)
 
-
-    game.add.text(game.world.centerX,120, 'Musica : |||||||||||||||||||||||||', {font:'20px ', fill:'#fff'})
-    .anchor.set(.5)
-    game.add.text(game.world.centerX,180, 'Sons : |||||||||||||||||||||||||', {font:'20px ', fill:'#fff'})
-    .anchor.set(.5)
-    game.add.text(game.world.centerX,220, 'Video : |||||||||||||||||||||||||', {font:'20px ', fill:'#fff'})
-    .anchor.set(.5)
-
-
+    game.add.sprite(game.world.centerX,game.world.centerY,'settingsBG').anchor.set(.5)
 
      game.add.text(100,540, 'Selecionar = Cima/ Baixo ', {font:'15px ', fill:'#fff'});
      game.add.text(400,540, 'trocar = Esquerda/ Direita ', {font:'15px ', fill:'#fff'});
