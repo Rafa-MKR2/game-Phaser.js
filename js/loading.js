@@ -10,7 +10,7 @@ Loading = {
     loadingMusic.play();
 
 
-    game.add.sprite(game.world.centerX,100,'bg')
+    game.add.sprite(game.world.centerX,190,'bg')
     .anchor.set(.5)
 
    game.add.sprite(game.world.centerX,100, 'progressBar')
@@ -62,11 +62,14 @@ Loading = {
 
         game.load.image('settingsBG','image/Settings/SettingsBG.png')
 
-        game.load.image('noite','image/noite.png', 50,50);
+        game.load.image('BTNPLAY','image/Mainmenu/BTNPLAY.png');
+        game.load.image('BTNSETTINGS','image/Mainmenu/BTNSETTINGS.png');
 
-        game.load.image('background','image/bg.png',50,50);
+        game.load.image('noite','image/noite.png');
+
+        game.load.image('background','image/bg.png');
         game.load.image('bullet', 'image/bullet.png');
-        game.load.image('villagerGround','image/vilageground.png', 50,50);
+        game.load.image('villagerGround','image/vilageground.png');
 
     
 

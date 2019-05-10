@@ -4,28 +4,40 @@ Menu={
 
 
 create:function() {
-
+  game.add.sprite(game.world.centerX,190,'bg')
+      .anchor.set(.5)
+      
     game.add.text(
       game.world.centerX,
-      porcentagem(20,window.innerHeight), 'Midnight Shadow', {font: GameConfig.titleFont, fill:'#fff'})
+      porcentagem(20,window.innerHeight), 'Noire', {font: GameConfig.titleFont, fill:'#fff'})
+      .anchor.set(.5)
+    
+      game.add.button(game.world.centerX, game.world.centerY,'BTNPLAY',null, this, 1,3,2)
+      .anchor.set(.5) 
+
+      game.add.button(game.world.centerX,porcentagem(70,window.innerHeight),'BTNSETTINGS',null, this, 1,3,2)
       .anchor.set(.5)
 
-      
-
     this.NewGame = game.add.text(
-      porcentagem(35,window.innerWidth),
-      porcentagem(35,window.innerHeight)
-      , 'Novo Game', {font: GameConfig.textFont, fill:'#fff'});
+      game.world.centerX,
+      porcentagem(40,window.innerHeight)
+      , 'Novo Game', {font: GameConfig.textFont, fill:'#fff'})
+      this.NewGame.anchor.set(.5)
     
       this.record = game.add.text(
-      porcentagem(35,window.innerWidth),
-      porcentagem(50,window.innerHeight),
+        game.world.centerX,
+      porcentagem(55,window.innerHeight),
      'Recordes', {font: GameConfig.textFont, fill:'#fff'});
 
+     this.record.anchor.set(.5)
+
     this.option = game.add.text(
-      porcentagem(35,window.innerWidth),
-      porcentagem(65,window.innerHeight),
-     'Options', {font: GameConfig.textFont, fill:'#fff'});
+      game.world.centerX,
+      porcentagem(70,window.innerHeight),
+     'Opções', {font: GameConfig.textFont, fill:'#fff'});
+
+     this.option .anchor.set(.5)
+
 
     this.menu = [this.NewGame,this.record,this.option];
     this.select = 0;
