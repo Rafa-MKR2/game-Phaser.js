@@ -43,6 +43,7 @@ Loading = {
         game.load.spritesheet('buttonLeft', 'image/controles/flatDark04.png', 80, 80);
         game.load.spritesheet('buttonDown', 'image/controles/flatDark09.png', 80, 80);
 
+        game.load.spritesheet('menuAnimation','image/Mainmenu/shadowTeste2.png',200,48);
 
         game.load.spritesheet('block','image/block.png', 50,50);
 
@@ -64,6 +65,9 @@ Loading = {
 
         game.load.image('BTNPLAY','image/Mainmenu/BTNPLAY.png');
         game.load.image('BTNSETTINGS','image/Mainmenu/BTNSETTINGS.png');
+
+        game.load.image('shadowMenu','image/Mainmenu/ButtonBGshadowTeste.png');
+        game.load.image('shadowMenu2','image/Mainmenu/shadowTeste2.png');
 
         game.load.image('noite','image/noite.png');
 

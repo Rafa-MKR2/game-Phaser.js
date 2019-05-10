@@ -12,34 +12,23 @@ create:function() {
       porcentagem(20,window.innerHeight), 'Noire', {font: GameConfig.titleFont, fill:'#fff'})
       .anchor.set(.5)
     
-      game.add.button(game.world.centerX, game.world.centerY,'BTNPLAY',null, this, 1,3,2)
-      .anchor.set(.5) 
+      this.NewGame =   game.add.button(game.world.centerX, game.world.centerY,'BTNPLAY',null, this, 1,3,2)
+      this.NewGame.anchor.set(.5) 
 
-      game.add.button(game.world.centerX,porcentagem(70,window.innerHeight),'BTNSETTINGS',null, this, 1,3,2)
-      .anchor.set(.5)
-
-    this.NewGame = game.add.text(
-      game.world.centerX,
-      porcentagem(40,window.innerHeight)
-      , 'Novo Game', {font: GameConfig.textFont, fill:'#fff'})
-      this.NewGame.anchor.set(.5)
     
-      this.record = game.add.text(
-        game.world.centerX,
-      porcentagem(55,window.innerHeight),
-     'Recordes', {font: GameConfig.textFont, fill:'#fff'});
 
-     this.record.anchor.set(.5)
+      this.option  = game.add.button(game.world.centerX,porcentagem(70,window.innerHeight),'BTNSETTINGS',null, this, 1,3,2)
+     this.option.anchor.set(.5)
 
-    this.option = game.add.text(
-      game.world.centerX,
-      porcentagem(70,window.innerHeight),
-     'Opções', {font: GameConfig.textFont, fill:'#fff'});
+     this.shadow = game.add.sprite(game.world.centerX,game.world.centerY,'menuAnimation')
+     this.shadow.anchor.set(.5)
 
-     this.option .anchor.set(.5)
+    
+     this.shadow.animations.add('active',[0,1],10,true);
+     this.shadow.animations.play('active')
+  
 
-
-    this.menu = [this.NewGame,this.record,this.option];
+    this.menu = [this.NewGame,this.option];
     this.select = 0;
 
 
@@ -105,10 +94,8 @@ create:function() {
         this.menu.forEach(item => {
             if(item==this.menu[this.select]){
 
-                this.menu[this.select].fill = 'red';
-            }else{
-            item.fill = '#fff'
-
+              this.shadow.x = this.menu[this.select].x
+              this.shadow.y = this.menu[this.select].y
             }
         })
     },
@@ -118,21 +105,17 @@ create:function() {
     },
 
     downSeleciona: function(){
-     return this.select= this.select+1 >2?  this.select=0: this.select+1;
+     return this.select= this.select+1 >1?  this.select=0: this.select+1;
     },
 
     confirmar : function(){
-      var selecione = this.menu[this.select].text;
-      if(selecione=='Novo Game'){
+      var selecione = this.menu[this.select];
+      if(selecione== this.NewGame){
       
       
         return game.state.start('stage1');
 
-      }else if(selecione=='Recordes'){
-      
-        return game.state.start('recordes')
-
-      }else if(selecione=='Options'){
+      }else if(selecione== this.option){
         return game.state.start('options');
 
       }
