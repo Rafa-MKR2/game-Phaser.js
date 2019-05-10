@@ -31,6 +31,9 @@ Loading = {
         game.load.audio('oneshot', './sfx/oneShot.mp3');
         game.load.audio('reload', './sfx/9mm Clip Load.mp3');
 
+        game.load.audio('menuSfx', './sfx/Menu.ogg');
+        game.load.audio('menuMusic', './sfx/Next to You.mp3');
+
      
         game.load.audio('explosionStart', './sfx/synthetic_explosion_1.mp3');
 
@@ -42,6 +45,7 @@ Loading = {
         game.load.spritesheet('buttonRight', 'image/controles/flatDark05.png', 80, 80);
         game.load.spritesheet('buttonLeft', 'image/controles/flatDark04.png', 80, 80);
         game.load.spritesheet('buttonDown', 'image/controles/flatDark09.png', 80, 80);
+        game.load.spritesheet('pause', 'image/controles/flatDark41.png', 80, 80);
 
         game.load.spritesheet('menuAnimation','image/Mainmenu/shadowTeste2.png',200,48);
 
@@ -68,6 +72,7 @@ Loading = {
 
         game.load.image('shadowMenu','image/Mainmenu/ButtonBGshadowTeste.png');
         game.load.image('shadowMenu2','image/Mainmenu/shadowTeste2.png');
+        game.load.image('pauseBg','image/Pausemenu/PAUSEPRESET.png');
 
         game.load.image('noite','image/noite.png');
 
@@ -88,10 +93,14 @@ Loading = {
         // chama menu
           setTimeout(function(){
             game.state.start("menu")
-            loadingMusic.stop();
+            loadingMusic.stop()
+            loadingMusic = game.add.audio('menuMusic')
+            loadingMusic.loop = true;
+            loadingMusic.volume = .6;
+            loadingMusic.play();
+        
 
-
-          },1500)
+          },500)
       
     }
 }

@@ -6,7 +6,7 @@ Stage1 = {
 
     create: function() {
    
-      
+        loadingMusic.stop();
    var music =  game.add.audio('welcome')
        music.loop = true;
        music.volume = .1;
@@ -185,13 +185,8 @@ Stage1 = {
            this.bulletsCount = game.add.text(130,15,'', {font:'25px ', fill:'#fff'})
            this.bulletsCount.fixedToCamera=true;
 
-           this.pauseText =  game.add.text(330,220,'', {font:'50px ', fill:'#fff'});
-           this.pauseText.fixedToCamera=true;
 
 
-
-    
-    
            
            if(GameConfig.mobile==true){
            this.btnA = game.add.button(
@@ -204,6 +199,12 @@ Stage1 = {
                         porcentagem(70,window.innerHeight), 'buttonB', null, this,4, 3, 5);
                         this.btnB.fixedToCamera=true;
 
+            
+            this.pauseButton = game.add.button(
+                        porcentagem(55,window.innerWidth),
+                        porcentagem(85,window.innerHeight), 'pause', this.pause, this,4, 3, 5);
+                        this.pauseButton.anchor.set(.5)
+                        this.pauseButton.fixedToCamera=true;
         
             this.btnUp = game.add.button(
                         porcentagem(10,window.innerWidth),
@@ -276,6 +277,13 @@ Stage1 = {
         
       
 
+           this.pauseText =  game.add.image(
+            porcentagem(50,window.innerWidth),
+            porcentagem(40,window.innerHeight), 'pauseBg');
+           this.pauseText.anchor.set(.5)
+           this.pauseText.visible =false;
+           this.pauseText.fixedToCamera=true;
+
     
 
 
@@ -314,10 +322,6 @@ Stage1 = {
     this.moveEnemy(this.enemy3.animation)   
 
 
-  
-    //impede personagem de andar atirando...
-    if(!this.input.mousePointer.isDown){
-    
         // player movimento
        if(this.controls.left.isDown &&
          !this.controls.right.isDown ||
@@ -350,7 +354,6 @@ Stage1 = {
         this.player.body.velocity.y = 200;
         this.player.direction = "down";
     }
-}
       
    
        switch(this.player.direction){ 
@@ -384,11 +387,11 @@ Stage1 = {
 
     if(game.paused==true){
         game.paused=false;
-        this.pauseText.text = ''
+        this.pauseText.visible =false
 
     }else if(game.paused==false){
         game.paused=true;
-        this.pauseText.text = 'Pause'
+        this.pauseText.visible =true
         return;
     }
  },
@@ -543,7 +546,7 @@ moveEnemy: function(enemy){
             if(this.maze[enemyRow][enemyCol -1]  < 1 &&
                 this.enemy.direction !== 'RIGHT' &&
                 this.player.x < this.enemy.x){
-             
+                    
                  validPath.push('LEFT');
              }
     
@@ -611,11 +614,8 @@ moveEnemy: function(enemy){
           ){
             Perserguir()
          
-            console.log('perseguindo vc')
-
         }else{
             patrulhandoArea()
-            console.log('patrulhando')
 
         }
 

@@ -1,18 +1,18 @@
 
-
 Menu={
 
 
 create:function() {
-  game.add.sprite(game.world.centerX,190,'bg')
-      .anchor.set(.5)
-      
-    game.add.text(
-      game.world.centerX,
-      porcentagem(20,window.innerHeight), 'Noire', {font: GameConfig.titleFont, fill:'#fff'})
-      .anchor.set(.5)
+
+
+  game.add.sprite(game.world.centerX,190,'bg').anchor.set(.5)
+
+  this.menuSfx= game.add.audio('menuSfx')
+
+
+    game.add.text(game.world.centerX,porcentagem(20,window.innerHeight), 'Noire', {font: GameConfig.titleFont, fill:'#fff'}).anchor.set(.5)
     
-      this.NewGame =   game.add.button(game.world.centerX, game.world.centerY,'BTNPLAY',null, this, 1,3,2)
+      this.NewGame = game.add.button(game.world.centerX, game.world.centerY,'BTNPLAY',null, this, 1,3,2)
       this.NewGame.anchor.set(.5) 
 
     
@@ -24,7 +24,7 @@ create:function() {
      this.shadow.anchor.set(.5)
 
     
-     this.shadow.animations.add('active',[0,1],10,true);
+     this.shadow.animations.add('active',[0,1],8,true);
      this.shadow.animations.play('active')
   
 
@@ -101,10 +101,15 @@ create:function() {
     },
 
     upSeleciona: function(){
-      return this.select=this.select-1 <0? this.select=2 : this.select-1;
+      this.menuSfx.volume=.2
+      this.menuSfx.play()
+      return this.select=this.select-1 <0? this.select=1 : this.select-1;
+
     },
 
     downSeleciona: function(){
+      this.menuSfx.volume=.2
+      this.menuSfx.play()
      return this.select= this.select+1 >1?  this.select=0: this.select+1;
     },
 
