@@ -1,6 +1,6 @@
 Options = {
     create:function() {
-
+        game.world.setBounds(0, 0,GameConfig.width, GameConfig.height);
     game.add.text(game.world.centerX,20, 'Opções de Jogo', {font:'40px ', fill:'#fff'})
     .anchor.set(.5)
 

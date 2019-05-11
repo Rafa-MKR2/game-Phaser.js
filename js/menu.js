@@ -1,26 +1,31 @@
 
 Menu={
 
-
 create:function() {
 
+  game.world.setBounds(0, 0,GameConfig.width, GameConfig.height);
 
-  game.add.sprite(game.world.centerX,190,'bg').anchor.set(.5)
+  game.add.sprite( porcentagem(50,window.innerWidth),190,'bg').anchor.set(.5)
 
   this.menuSfx= game.add.audio('menuSfx')
 
 
-    game.add.text(game.world.centerX,porcentagem(20,window.innerHeight), 'Noire', {font: GameConfig.titleFont, fill:'#fff'}).anchor.set(.5)
+    game.add.text( game.world.centerX ,porcentagem(20,window.innerHeight), 'Noire',
+     {font: GameConfig.titleFont, fill:'#fff'})
+     .anchor.set(.5)
+     .fixedToCamera=true;
     
-      this.NewGame = game.add.button(game.world.centerX, game.world.centerY,'BTNPLAY',null, this, 1,3,2)
+      this.NewGame = game.add.button( game.world.centerX,  game.world.centerY,'BTNPLAY',null, this, 1,3,2)
+      this.NewGame.fixedToCamera=true;
       this.NewGame.anchor.set(.5) 
 
     
 
-      this.option  = game.add.button(game.world.centerX,porcentagem(70,window.innerHeight),'BTNSETTINGS',null, this, 1,3,2)
+     this.option = game.add.button(game.world.centerX,game.world.centerY+80,'BTNSETTINGS',null, this, 1,3,2)
+     this.option.fixedToCamera=true;
      this.option.anchor.set(.5)
 
-     this.shadow = game.add.sprite(game.world.centerX,game.world.centerY,'menuAnimation')
+     this.shadow = game.add.sprite(game.world.centerX,  game.world.centerY,'menuAnimation')
      this.shadow.anchor.set(.5)
 
     
@@ -118,10 +123,10 @@ create:function() {
       if(selecione== this.NewGame){
       
       
-        return game.state.start('stage1');
+         game.state.start('stage1');
 
       }else if(selecione== this.option){
-        return game.state.start('options');
+         game.state.start('options');
 
       }
     }

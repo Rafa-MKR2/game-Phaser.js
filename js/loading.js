@@ -72,9 +72,14 @@ Loading = {
 
         game.load.image('shadowMenu','image/Mainmenu/ButtonBGshadowTeste.png');
         game.load.image('shadowMenu2','image/Mainmenu/shadowTeste2.png');
+
+
         game.load.image('pauseBg','image/Pausemenu/PAUSEPRESET.png');
+        game.load.image('menuPausedBtn','image/Pausemenu/BTNMENU.png');
+        game.load.image('settingPausedBtn','image/Pausemenu/BTNSETTINGS.png');
 
         game.load.image('noite','image/noite.png');
+        game.load.image('dialogue','image/dialogue.png'); 
 
         game.load.image('background','image/bg.png');
         game.load.image('bullet', 'image/bullet.png');
@@ -89,16 +94,21 @@ Loading = {
     create: function() {
     
    
+      game.input.addPointer();
+      game.input.addPointer();
+      game.input.addPointer();
+      game.input.addPointer();
+      game.input.addPointer();
      
         // chama menu
           setTimeout(function(){
-            game.state.start("menu")
             loadingMusic.stop()
             loadingMusic = game.add.audio('menuMusic')
             loadingMusic.loop = true;
             loadingMusic.volume = .6;
             loadingMusic.play();
-        
+            game.state.start('menu')
+
 
           },500)
       

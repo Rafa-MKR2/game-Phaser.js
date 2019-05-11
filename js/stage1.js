@@ -17,12 +17,6 @@ Stage1 = {
        sartSound.volume = .1;
        sartSound.play()
       
-       game.input.addPointer();
-       game.input.addPointer();
-       game.input.addPointer();
-       game.input.addPointer();
-       game.input.addPointer();
-       game.input.addPointer();
         
         
        
@@ -274,27 +268,48 @@ Stage1 = {
             }
 
           
-        
+       var dialogue = game.add.image( 
+        porcentagem(50,window.innerWidth),
+        porcentagem(15,window.innerHeight),'dialogue')
+        dialogue.anchor.set(.5);
+        dialogue.fixedToCamera=true;
       
-
-           this.pauseText =  game.add.image(
+        
+        // Puase menu Background
+        this.pauseBg =  game.add.image(
             porcentagem(50,window.innerWidth),
             porcentagem(40,window.innerHeight), 'pauseBg');
-           this.pauseText.anchor.set(.5)
-           this.pauseText.visible =false;
-           this.pauseText.fixedToCamera=true;
-
-    
+           this.pauseBg.anchor.set(.5)
+           this.pauseBg.visible =false;
+           this.pauseBg.fixedToCamera=true;
 
 
+        // Botao Menu Puase 
+        this.pauseBtnMenu = game.add.button(
+            porcentagem(50,window.innerWidth),
+            porcentagem(35,window.innerHeight), 'menuPausedBtn', function(){
+                game.paused=false;
+                music.stop();
+                loadingMusic.play();
+                game.state.start('menu',true,false)
+            },this);
+        this.pauseBtnMenu.anchor.set(.5)
+        this.pauseBtnMenu.fixedToCamera=true;
+        this.pauseBtnMenu.visible=false;
+
+
+     
+        this.pauseBtnSettings = game.add.button(
+            porcentagem(50,window.innerWidth),
+            porcentagem(50,window.innerHeight), 'settingPausedBtn', null,this);
+        this.pauseBtnSettings.anchor.set(.5)
+        this.pauseBtnSettings.fixedToCamera=true;
+        this.pauseBtnSettings.visible=false;
    },
    
     update: function() {
 
-        this.btnA.onInputOver.add(function(){ }, this);
-
-        this.btnB.onInputOver.add(function(){ }, this);
-
+    
       
 
 
@@ -387,11 +402,16 @@ Stage1 = {
 
     if(game.paused==true){
         game.paused=false;
-        this.pauseText.visible =false
+        this.pauseBg.visible =false;
+        this.pauseBtnMenu.visible =false;
+        this.pauseBtnSettings.visible =false;
 
     }else if(game.paused==false){
         game.paused=true;
-        this.pauseText.visible =true
+        this.pauseBg.visible =true;
+        this.pauseBtnMenu.visible =true;
+        this.pauseBtnSettings.visible =true;
+
         return;
     }
  },
