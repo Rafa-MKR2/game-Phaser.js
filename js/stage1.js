@@ -269,8 +269,10 @@ Stage1 = {
 
           
        var dialogue = game.add.image( 
-        porcentagem(50,window.innerWidth),
-        porcentagem(15,window.innerHeight),'dialogue')
+           GameConfig.mobile ?
+           porcentagem(50,window.innerWidth) : porcentagem(35,window.innerWidth),
+       
+           porcentagem(15,window.innerHeight),'dialogue')
         dialogue.anchor.set(.5);
         dialogue.fixedToCamera=true;
       

@@ -9,9 +9,12 @@ Loading = {
     loadingMusic.volume = .6;
     loadingMusic.play();
 
+    var bg = game.add.sprite(
+      game.world.centerX, 
+      GameConfig.mobile ? 190 : game.world.centerY,'bg');
+        bg.anchor.set(.5);
+        bg.fixedToCamera=true;
 
-    game.add.sprite(game.world.centerX,190,'bg')
-    .anchor.set(.5)
 
    game.add.sprite(game.world.centerX,100, 'progressBar')
     .anchor.set(.5)

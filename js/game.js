@@ -8,9 +8,9 @@ function porcentagem(percent,valor){
 
 var GameConfig ={
     height : 600,
-    width : 960,
-    titleFont :  '60px',
-    textFont :  '40px',
+    width : 900,
+    titleFont :  '60px superstar',
+    textFont :  '40px superstar',
 
     mobile  : false
     
@@ -21,8 +21,7 @@ var GameConfig ={
 if(window.innerHeight<=360 && window.innerWidth<=740  ||
    window.innerHeight<=360 && window.innerWidth<=640  || 
    window.innerHeight<=384 && window.innerWidth<=640  ||
-   window.innerHeight<=279 && window.innerWidth<=640  ||
-   window.innerHeight<=427 && window.innerWidth<=980 ||
+   window.innerHeight<=427 && window.innerWidth<=980  ||
    window.innerHeight<=414 && window.innerWidth<=736){
 
     GameConfig.height =window.innerHeight;

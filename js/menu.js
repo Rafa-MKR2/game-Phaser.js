@@ -3,9 +3,15 @@ Menu={
 
 create:function() {
 
+  // reseta tamanho do game.word
   game.world.setBounds(0, 0,GameConfig.width, GameConfig.height);
 
-  game.add.sprite( porcentagem(50,window.innerWidth),190,'bg').anchor.set(.5)
+  var bg = game.add.sprite(
+           game.world.centerX, 
+           GameConfig.mobile ? 190 : game.world.centerY,'bg');
+
+      bg.anchor.set(.5);
+      bg.fixedToCamera=true;
 
   this.menuSfx= game.add.audio('menuSfx')
 
@@ -15,11 +21,9 @@ create:function() {
      .anchor.set(.5)
      .fixedToCamera=true;
     
-      this.NewGame = game.add.button( game.world.centerX,  game.world.centerY,'BTNPLAY',null, this, 1,3,2)
-      this.NewGame.fixedToCamera=true;
-      this.NewGame.anchor.set(.5) 
-
-    
+    this.NewGame = game.add.button( game.world.centerX, game.world.centerY,'BTNPLAY',null, this, 1,3,2)
+    this.NewGame.fixedToCamera=true;
+    this.NewGame.anchor.set(.5) 
 
      this.option = game.add.button(game.world.centerX,game.world.centerY+80,'BTNSETTINGS',null, this, 1,3,2)
      this.option.fixedToCamera=true;
@@ -32,12 +36,14 @@ create:function() {
      this.shadow.animations.add('active',[0,1],8,true);
      this.shadow.animations.play('active')
   
-
+    //Menu container
     this.menu = [this.NewGame,this.option];
+
+    // Armazana o indice do array, no qual item começara animaçao de selecionar
     this.select = 0;
 
 
-    // Controles Up / Down
+    // Controles Up, Down, Enter -> teclado
     this.up = game.input.keyboard.addKey(Phaser.Keyboard.UP);
     this.up.onDown.add(this.upSeleciona, this);
 
@@ -48,7 +54,7 @@ create:function() {
     this.enter.onDown.add(this.confirmar, this);
 
 
-  
+  // Controle no modo Mobile so ira aparece caso tela tenha tamanho minimo 
   if(GameConfig.mobile==true){
     game.add.button(
       porcentagem(70,window.innerWidth),
@@ -56,7 +62,7 @@ create:function() {
 
       game.add.button(
         porcentagem(85,window.innerWidth),
-        porcentagem(70,window.innerHeight), 'buttonB', actionOnClick, this, 1, 1, 0);
+        porcentagem(70,window.innerHeight), 'buttonB', null, this, 1, 1, 0);
 
      game.add.button(
         porcentagem(10,window.innerWidth),
@@ -64,11 +70,11 @@ create:function() {
 
      game.add.button(
           porcentagem(15,window.innerWidth),
-          porcentagem(65,window.innerHeight), 'buttonRight', actionOnClick,this);
+          porcentagem(65,window.innerHeight), 'buttonRight', null,this);
        
      game.add.button(
             porcentagem(3,window.innerWidth),
-            porcentagem(65,window.innerHeight), 'buttonLeft', actionOnClick, this);
+            porcentagem(65,window.innerHeight), 'buttonLeft', null, this);
        
      game.add.button(
               porcentagem(10,window.innerWidth),
@@ -76,14 +82,7 @@ create:function() {
           
     }
     
-    function actionOnClick () {
-
-    console.log('teste')
   
-  }
-   
-
-
 
 },
 
@@ -96,9 +95,9 @@ create:function() {
 
 
     checked : function(){
+      // pega todos itens do menu e atualiza a posiçao da animaçao
         this.menu.forEach(item => {
             if(item==this.menu[this.select]){
-
               this.shadow.x = this.menu[this.select].x
               this.shadow.y = this.menu[this.select].y
             }
@@ -113,22 +112,19 @@ create:function() {
     },
 
     downSeleciona: function(){
-      this.menuSfx.volume=.2
+      this.menuSfx.volume=.5
       this.menuSfx.play()
      return this.select= this.select+1 >1?  this.select=0: this.select+1;
     },
 
     confirmar : function(){
       var selecione = this.menu[this.select];
-      if(selecione== this.NewGame){
-      
-      
-         game.state.start('stage1');
 
-      }else if(selecione== this.option){
-         game.state.start('options');
-
-      }
+     selecione===this.NewGame ? 
+       game.state.start('stage1') : null;
+      
+      selecione===this.option ? 
+        game.state.start('options') : null;
     }
 
 }

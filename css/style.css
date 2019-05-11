@@ -1,0 +1,20 @@
+@font-face{
+    font-family: superstar;
+    src : url('./superstarorig_memesbruh03.ttf')
+}
+*{
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+body{
+    background: rgb(10, 10, 10);
+}
+
+
+
+.texto{
+    font-family: superstar;
+    
+}

@@ -1,7 +1,15 @@
 Options = {
     create:function() {
+        // Reseta game.word
         game.world.setBounds(0, 0,GameConfig.width, GameConfig.height);
-    game.add.text(game.world.centerX,20, 'Opções de Jogo', {font:'40px ', fill:'#fff'})
+
+        var bg = game.add.sprite(
+            game.world.centerX, 
+            GameConfig.mobile ? 190 : game.world.centerY,'bg'); 
+       bg.anchor.set(.5);
+       bg.fixedToCamera=true;
+ 
+    game.add.text(game.world.centerX,20, 'Game Option', {font:GameConfig.titleFont, fill:'#fff'})
     .anchor.set(.5)
 
     game.add.sprite(game.world.centerX,game.world.centerY,'settingsBG').anchor.set(.5)
@@ -48,22 +56,7 @@ Options = {
     this.enter.onDown.add(this.voltarAoMenu, this);
 
     },
-    option: function() {
-
-        if (pointer.y < 100)
-        {
-            music.mute = false;
-        }
-        else if (pointer.y < 300)
-        {
-            music.volume += 0.1;
-        }
-        else
-        {
-            music.volume -= 0.1;
-        }
-    
-    },
+   
     update: function() {
 
 
