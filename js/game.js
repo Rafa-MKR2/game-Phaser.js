@@ -26,6 +26,7 @@ if(window.innerHeight<=360 && window.innerWidth<=740  ||
 
     GameConfig.height =window.innerHeight;
     GameConfig.width =  window.innerWidth;
+    textFont = '10px superstar'
     GameConfig.mobile = true;
 }
 

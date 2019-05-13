@@ -12,34 +12,14 @@ Stage1 = {
        music.volume = .1;
        music.play();
 
-
-       var sartSound = game.add.audio('explosionStart');
-       sartSound.volume = .1;
-       sartSound.play()
-      
-        
-        
-       
+    
        this.player;
 
+       // Teclado controles
        this.controls = game.input.keyboard.createCursorKeys();
    
         
    
-       this.bullets;
-       this.reload = 6;
-       this.spriteBullets = [];
-
-       //inventario
-       this.ammo = 999;
-
-
-
-
-
-        // tempo de disparo
-       this.fireRate = 1000;
-       this.nextFire = 0;
        
 
        game.world.setBounds(0, 0,2000, 2000);
@@ -48,9 +28,7 @@ Stage1 = {
        this.P = game.input.keyboard.addKey(Phaser.Keyboard.P); 
        this.P.onDown.add(this.pause, this);
 
-       this.explosions = game.add.group();
-       this.explosions.createMultiple(30, 'blood');
-   
+      
 
         // player e camera
         this.enemy1 = this.EnemyFactory(875,75,'RIGHT', 'zumbie1')
@@ -77,22 +55,36 @@ Stage1 = {
        
    
        this.maze = [
-           [3,3,3,3,3,3,3,3,3,3,1,1,1,1,1,1,1,1,1,1,1,1],
-           [3,3,3,3,3,3,3,3,3,3,4,4,4,4,4,6,4,4,4,4,4,1],
-           [3,3,3,3,3,3,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,1],
+           [3,3,3,3,3,3,3,3,3,3,0,0,5,5,5,5,5,5,5,5,5,1],
+           [3,3,3,3,3,3,3,3,3,3,10,10,8,8,4,11,4,4,8,8,4],
+           [3,3,3,3,3,3,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0],
            [1,3,3,3,3,3,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,1],
            [1,5,5,5,5,5,5,5,5,5,0,0,0,0,0,0,0,0,0,0,0,1],
-           [1,4,4,4,4,4,4,6,4,4,0,0,0,0,0,0,0,0,0,0,0,1],
+           [1,4,4,9,4,4,9,6,4,4,0,0,0,0,0,0,0,0,0,0,0,1],
            [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
            [1,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-           [1,0,0,0,0,0,0,0,0,3,3,3,3,3,3,3,3,3,0,0,0,1],
+           [1,0,0,0,0,0,0,0,0,7,7,7,7,7,7,7,7,7,0,0,0,1],
            [1,0,0,0,0,0,0,0,0,3,3,3,3,3,3,3,3,3,0,0,0,1],
            [1,0,0,0,0,0,0,0,0,3,3,3,3,3,3,3,3,3,0,0,0,1],
            [1,0,0,0,0,0,0,0,0,5,5,5,5,5,5,5,5,5,0,0,0,1],
-           [1,0,0,0,0,0,0,0,0,4,4,4,6,4,4,4,4,4,0,0,0,1],
+           [1,0,0,0,0,0,0,0,0,4,8,4,6,4,8,4,8,4,0,0,0,1],
            [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
            [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
            [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+           [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+           [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+           [7,7,7,7,7,7,7,7,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+           [3,3,3,3,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+           [3,3,3,3,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+           [3,3,3,5,5,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+           [3,3,3,8,8,5,5,5,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+           [5,5,5,13,12,14,11,14,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+           [4,4,4,12,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+           [1,0,0,0,0,0,0,0,0,7,7,7,7,7,7,7,7,7,0,0,0,1],
+           [1,0,0,0,0,0,0,0,0,3,3,3,3,3,3,3,3,3,0,0,0,1],
+           [1,0,0,0,0,0,0,0,0,3,3,3,3,3,3,3,3,3,0,0,0,1],
+           [1,0,0,0,0,0,0,0,0,5,5,5,5,5,5,5,5,5,0,0,0,1],
+           [1,0,0,0,0,0,0,0,0,4,8,4,6,4,8,4,8,4,0,0,0,1],
            [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
            [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
            [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
@@ -104,20 +96,6 @@ Stage1 = {
    
 
 
-          
-
-  // Balas
-   
-  this.bullets = game.add.group();
-  this.bullets.enableBody = true;
-  this.bullets.physicsBodyType = Phaser.Physics.ARCADE;
-
-
-  this.bullets.createMultiple(50, 'bullet');
-  this.bullets.setAll('checkWorldBounds', true);
-  this.bullets.setAll('outOfBoundsKill', true);
-  
-      
    
    
        // paredes
@@ -155,31 +133,66 @@ Stage1 = {
                        this.player.animations.add('shotingUp',[28],4,true);
 
                    } else
+                   if(tile === 7){
+                    var telhadoAlto = this.blocks.create(x,y,'telhadoAlto');
+                    telhadoAlto.body.immovable = true;
+                   }else
                    if(tile === 3){
                     var telhado = this.blocks.create(x,y,'telhado');
                         telhado.body.immovable = true;
 
                    }else
                    if(tile === 4){
-                    var paredesMadeira = this.blocks.create(x,y,'paredeMadeira');
-                        paredesMadeira.body.immovable = true;
+                    var ParedeVelha_baixa = this.blocks.create(x,y,'ParedeVelha_baixa');
+                    ParedeVelha_baixa.body.immovable = true;
                    }else
                    if(tile === 5){
-                    var paredeAlta = this.blocks.create(x,y,'paredeAlta');
-                        paredeAlta.body.immovable = true;
+                    var ParedeVelha_alto = this.blocks.create(x,y,'ParedeVelha_alto');
+                    ParedeVelha_alto.body.immovable = true;
                    }else
+
                    if(tile === 6){
                     var door = this.blocks.create(x,y,'door1');
                     door.body.immovable = true;
                    }
+                   if(tile === 8){
+                    var ParedeVelha_Janela = this.blocks.create(x,y,'ParedeVelha_Janela');
+                    ParedeVelha_Janela.body.immovable = true;
+                   }else
+                   if(tile === 9){
+                    var ParedeVelha_Janela_luz = this.blocks.create(x,y,'ParedeVelha_Janela_luz');
+                    ParedeVelha_Janela_luz.body.immovable = true;
+                   }
+                  
+                   else
+                   if(tile === 10){
+                    var velhoCercado = this.blocks.create(x,y,'velhoCercado');
+                    velhoCercado.body.immovable = true;
+                   }
+                   else
+                   if(tile === 11){
+                    var door2 = this.blocks.create(x,y,'door2');
+                    door2.body.immovable = true;
+                   }
+                   else
+                   if(tile === 12){
+                    var barril = this.blocks.create(x,y,'barril');
+                    barril.body.immovable = true;
+                   }
+                   else
+                   if(tile === 13){
+                    var barrilComplemento = this.blocks.create(x,y,'conjuntoDeBarril');
+                    barrilComplemento.body.immovable = true;
+                   }
+                   if(tile === 14){
+                    var animacaoJanela = this.blocks.create(x,y,'JanelaPiscando_animacao');
+                    animacaoJanela.animations.add('active',[0,1],1,true);
+                    animacaoJanela.animations.play('active')
+                    animacaoJanela.body.immovable = true;
+                   }
                }
            }
    
-
-           this.bulletsCount = game.add.text(130,15,'', {font:'25px ', fill:'#fff'})
-           this.bulletsCount.fixedToCamera=true;
-
-
 
            
            if(GameConfig.mobile==true){
@@ -190,7 +203,8 @@ Stage1 = {
 
             this.btnB = game.add.button(
                         porcentagem(85,window.innerWidth),
-                        porcentagem(70,window.innerHeight), 'buttonB', null, this,4, 3, 5);
+                        porcentagem(70,window.innerHeight), 'buttonB',  function(){
+                        }, this,4, 3, 5);
                         this.btnB.fixedToCamera=true;
 
             
@@ -268,13 +282,9 @@ Stage1 = {
             }
 
           
-       var dialogue = game.add.image( 
-           GameConfig.mobile ?
-           porcentagem(50,window.innerWidth) : porcentagem(35,window.innerWidth),
-       
-           porcentagem(15,window.innerHeight),'dialogue')
-        dialogue.anchor.set(.5);
-        dialogue.fixedToCamera=true;
+            
+                    
+                 
       
         
         // Puase menu Background
@@ -313,18 +323,17 @@ Stage1 = {
 
     
       
-
+      
 
        this.player.body.velocity.x = 0;
        this.player.body.velocity.y = 0;
 
        game.physics.arcade.collide(this.player,this.blocks);
 
-         this.p1 = game.physics.arcade.overlap(this.bullets,this.enemy1.animation, this.damageControll,null, this);
-         this.p2 = game.physics.arcade.overlap(this.bullets,this.enemy2.animation, this.damageControll,null, this);
-         this.p3 = game.physics.arcade.overlap(this.bullets,this.enemy3.animation,this.damageControll,null, this);
+         this.p1 = game.physics.arcade.overlap(this.player,this.enemy1.animation, this.damageControll,null, this);
+         this.p2 = game.physics.arcade.overlap(this.player,this.enemy2.animation, this.damageControll,null, this);
+         this.p3 = game.physics.arcade.overlap(this.player,this.enemy3.animation,this.damageControll,null, this);
 
-        this.blood()
 
         // DIRECIONAL WASD OPCIONAL
         this.W = game.input.keyboard.addKey(Phaser.Keyboard.W);
@@ -418,117 +427,6 @@ Stage1 = {
     }
  },
 
-   // Display bullets
-   displayStatus : function(){
-
-    this.spriteBullets.forEach(element => element.destroy());
-    this.spriteBullets =[]
-
-    for(var i =0; i<this.reload; i++){
-        var pos = 200+(20*i)
-
-        var imagem = game.add.image(pos,15,'ammo');
-        imagem.fixedToCamera=true;
-        this.spriteBullets.push(imagem)
-    }  
-},
-
-
-   //dispara bala do revolve
-   fire: function(x,y) {
-   
-    // atualiza display a cada disparo
-    this.displayStatus()
-
-
-       if(game.time.now >  this.nextFire && this.bullets.countDead() > 0){  
-        
-
-   
-
-        if(this.reload>0){
-         // remove uma bala 
-         this.reload--;
-
-        this.nextFire = game.time.now + this.fireRate;
-        var bullet = this.bullets.getFirstDead();
-   
-           bullet.reset(this.player.x +x , this.player.y + y);
-   
-           game.physics.arcade.moveToPointer(bullet,4500);
-   
-           var songShoting = game.add.audio('oneshot');
-               songShoting.volume = .2;
-               songShoting.play()
-
-        
-        }else if(game.time.now >  this.nextFire && this.bullets.countDead() > 0){
-            this.nextFire = game.time.now + this.fireRate;
-    
-            var UpBullets = game.input.keyboard.addKey(Phaser.Keyboard.R);
-            UpBullets.onDown.add(this.reloadWeapon, this);
-    
-        var noBullets = game.add.audio('reload');
-        noBullets.volume = .5;
-        noBullets.play()
-        }
-     
-      
-    }
-   
-},
-
-   reloadWeapon: function(){
-
- if(this.reload<6){
-    this.bulletsCount.text =this.ammo+' / ';
-
-    this.reload++;
-    var reloading = game.add.audio('reload');
-    reloading.volume = .7;
-    reloading.play()
-    this.ammo--;
-    // atualiza display das balas
-    this.displayStatus()
-
-     }
-
-},
-
-blood :  function(){
-
-    if(this.p1==true){
-        this.enemy1.life-=25
-        console.log(this.enemy1.life);
-        var explosion = this.explosions.getFirstExists(false);
-        explosion.reset(this.enemy1.animation.x, this.enemy1.animation.y);
-        explosion.play('blood', 10, true, true);
-    
-        setTimeout(function(){ explosion.kill()},5000)
-    }
-
-    if(this.p2==true){
-        this.enemy2.life-=25
-        console.log(this.enemy1.life);
-        var explosion = this.explosions.getFirstExists(false);
-        explosion.reset(this.enemy2.animation.x, this.enemy2.animation.y);
-        explosion.play('blood', 30, true, true);
-        setTimeout(function(){ explosion.kill()},5000)
-
-    }
-    if(this.p3==true){
-        this.enemy3.life-=25
-        console.log(this.enemy1.life);
-        var explosion = this.explosions.getFirstExists(false);
-        explosion.reset(this.enemy3.animation.x, this.enemy3.animation.y);
-        explosion.play('blood', 30, true, true);
-        setTimeout(function(){ explosion.kill()},5000)
-
-    }
-
-    return;
-},
-
 
 // Controle de inimigos
 	EnemyFactory : function(posX,posY, direction, enemySprite){
@@ -565,21 +463,21 @@ moveEnemy: function(enemy){
         var validPath = [];
 
         var Perserguir = function(){
-            if(this.maze[enemyRow][enemyCol -1]  < 1 &&
+            if(this.maze[enemyRow][enemyCol -1]  < 2 &&
                 this.enemy.direction !== 'RIGHT' &&
                 this.player.x < this.enemy.x){
                     
                  validPath.push('LEFT');
              }
     
-             if(this.maze[enemyRow][enemyCol +1] < 1 &&
+             if(this.maze[enemyRow][enemyCol +1] < 2 &&
                 this.enemy.direction !== 'LEFT' &&
                 this.player.x > this.enemy.x){
     
                      validPath.push('RIGHT');
               }
          
-             if(this.maze[enemyRow - 1][enemyCol]  < 1 &&
+             if(this.maze[enemyRow - 1][enemyCol]  < 2 &&
                 this.enemy.direction !== 'DOWN' &&
                 this.player.y < this.enemy.y){
     
@@ -587,7 +485,7 @@ moveEnemy: function(enemy){
              }
          
     
-             if(this.maze[enemyRow + 1][enemyCol]  < 1 &&
+             if(this.maze[enemyRow + 1][enemyCol]  < 2 &&
                 this.enemy.direction !== 'UP' &&
                 this.player.y > this.enemy.y){
     
@@ -626,18 +524,20 @@ moveEnemy: function(enemy){
          
           }.bind(this)
 
-
-
         // Logica do campo de visao dos inimigos
         if(this.enemy.x-400 < this.player.x && 
            this.enemy.x+400 >  this.player.x &&
            this.enemy.y-400 < this.player.y &&
-           this.enemy.y+400 > this.player.y
+           this.enemy.y+400 > this.player.y &&
+           this.player.x <1100 && this.player.y < 1050
           ){
             Perserguir()
+            console.log('perseguindo vc '+  this.enemy.directio)
+
          
         }else{
             patrulhandoArea()
+            console.log('patrulhando area....')
 
         }
 
@@ -668,8 +568,12 @@ moveEnemy: function(enemy){
 
 },
 
-dieZombie : function(zombie){
+damageControll: function(){
+  console.log('pego pelo zumbie')
+},
 
+mensager : function(){
+   
 
 },
 

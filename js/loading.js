@@ -31,14 +31,11 @@ Loading = {
      
         
         game.load.audio('welcome', './sfx/Kim Lightyear - Braindead.mp3');
-        game.load.audio('oneshot', './sfx/oneShot.mp3');
-        game.load.audio('reload', './sfx/9mm Clip Load.mp3');
-
+    
         game.load.audio('menuSfx', './sfx/Menu.ogg');
         game.load.audio('menuMusic', './sfx/Next to You.mp3');
 
      
-        game.load.audio('explosionStart', './sfx/synthetic_explosion_1.mp3');
 
         
         game.load.spritesheet('buttonA', 'image/controles/flatDark35.png', 80, 80);
@@ -52,17 +49,28 @@ Loading = {
 
         game.load.spritesheet('menuAnimation','image/Mainmenu/shadowTeste2.png',200,48);
 
-        game.load.spritesheet('block','image/block.png', 50,50);
+        game.load.spritesheet('block','tileset/CercaMetal.png', 50,50);
 
-        game.load.spritesheet('telhado','image/telhado.png', 50,50);
-        game.load.spritesheet('paredeAlta','image/parede.png', 50,50);
-        game.load.spritesheet('paredeMadeira','image/paredeMadeira.png', 50,50);
-        game.load.spritesheet('door1','image/door1.png', 50,50);
-        game.load.spritesheet('ammo','image/ammo.png', 48,28);
+        game.load.spritesheet('telhadoAlto','tileset/velhoTelhado_alto.png', 50,50);
+        game.load.spritesheet('telhado','tileset/velhoTelhado.png', 50,50);
+
+        game.load.spritesheet('ParedeVelha_alto','tileset/ParedeVelha_alto.png', 50,50);
+        game.load.spritesheet('ParedeVelha_baixa','tileset/ParedeVelha_baixa.png', 50,50);
+        game.load.spritesheet('door1','tileset/PortaVelha.png', 50,50);
+        game.load.spritesheet('door2','tileset/portaVelha_azul.png', 50,50);
+
+        game.load.spritesheet('barril','tileset/barril.png', 50,50);
+        game.load.spritesheet('conjuntoDeBarril','tileset/conjuntoDeBarril.png', 50,50);
+
+
+        game.load.spritesheet('ParedeVelha_Janela','tileset/ParedeVelha_Janela.png', 50,50);
+        game.load.spritesheet('ParedeVelha_Janela_luz','tileset/ParedeVelha_Janela_luz.png', 50,50);
+        game.load.spritesheet('JanelaPiscando_animacao','tileset/JanelaPiscando_animacao.png', 50,50);
+
+        game.load.spritesheet('velhoCercado','tileset/velhoCercado.png', 50,50);
 
         game.load.spritesheet('player','image/play.png',31.50,48.5);
 
-        game.load.spritesheet('blood','image/blood.png',57,57);
 
         game.load.spritesheet('zumbie1','image/zombie05.png', 32,48);
         game.load.spritesheet('zumbie2','image/zombie06.png', 32,48);
@@ -85,8 +93,7 @@ Loading = {
         game.load.image('dialogue','image/dialogue.png'); 
 
         game.load.image('background','image/bg.png');
-        game.load.image('bullet', 'image/bullet.png');
-        game.load.image('villagerGround','image/vilageground.png');
+        game.load.image('villagerGround','tileset/ground.png');
 
     
 
