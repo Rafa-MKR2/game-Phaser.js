@@ -1,12 +1,10 @@
-
-
 Stage1 = {
 
 
 
     create: function() {
    
-        loadingMusic.stop();
+       loadingMusic.stop();
    var music =  game.add.audio('welcome')
        music.loop = true;
        music.volume = .1;
@@ -24,13 +22,15 @@ Stage1 = {
 
        game.world.setBounds(0, 0,2000, 2000);
        game.add.tileSprite(0, 0, 2000, 2000, 'villagerGround');
-   
+        
+
+       //atalhos no teclado
        this.P = game.input.keyboard.addKey(Phaser.Keyboard.P); 
        this.P.onDown.add(this.pause, this);
 
       
 
-        // player e camera
+        // Inimigos gerados
         this.enemy1 = this.EnemyFactory(875,75,'RIGHT', 'zumbie1')
         game.physics.arcade.enable(this.enemy1);
 
@@ -63,7 +63,7 @@ Stage1 = {
            [1,4,4,9,4,4,9,6,4,4,0,0,0,0,0,0,0,0,0,0,0,1],
            [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
            [1,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-           [1,0,0,0,0,0,0,0,0,7,7,7,7,7,7,7,7,7,0,0,0,1],
+           [1,0,0,0,0,0,0,0,0,7,7,7,7,7,7,7,15,7,0,0,0,1],
            [1,0,0,0,0,0,0,0,0,3,3,3,3,3,3,3,3,3,0,0,0,1],
            [1,0,0,0,0,0,0,0,0,3,3,3,3,3,3,3,3,3,0,0,0,1],
            [1,0,0,0,0,0,0,0,0,5,5,5,5,5,5,5,5,5,0,0,0,1],
@@ -71,9 +71,9 @@ Stage1 = {
            [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
            [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
            [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+           [1,0,0,0,0,0,0,0,0,0,0,0,0,0,16,0,0,0,0,0,0,1],
            [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-           [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-           [7,7,7,7,7,7,7,7,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+           [7,7,7,7,7,15,7,7,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
            [3,3,3,3,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
            [3,3,3,3,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
            [3,3,3,5,5,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
@@ -190,11 +190,20 @@ Stage1 = {
                     animacaoJanela.animations.play('active')
                     animacaoJanela.body.immovable = true;
                    }
+                   if(tile === 15){
+                    var chamine1 = this.blocks.create(x,y,'chamine1');
+                    chamine1.body.immovable = true;
+                   }
+                   if(tile === 16){
+                    var liveBau = this.blocks.create(x,y,'liveBau');
+                   
+                    liveBau.body.immovable = true;
+                   }
                }
            }
    
 
-           
+           // Controle MObile
            if(GameConfig.mobile==true){
            this.btnA = game.add.button(
                         porcentagem(70,window.innerWidth),
@@ -262,7 +271,6 @@ Stage1 = {
                         }, this,4, 3, 5);
                         this.btnLeft.fixedToCamera=true;
 
-               
              this.btnDown =  game.add.button(
                         porcentagem(10,window.innerWidth),
                         porcentagem(75,window.innerHeight), 'buttonDown',function(){
@@ -277,10 +285,8 @@ Stage1 = {
                     
                         }, this,4, 3, 5);
                         this.btnDown.fixedToCamera=true;
-
-                  
             }
-
+            // fim do controles MObile
           
             
                     
@@ -296,7 +302,7 @@ Stage1 = {
            this.pauseBg.fixedToCamera=true;
 
 
-        // Botao Menu Puase 
+        // Botao Menu na  janela de pause
         this.pauseBtnMenu = game.add.button(
             porcentagem(50,window.innerWidth),
             porcentagem(35,window.innerHeight), 'menuPausedBtn', function(){
@@ -310,7 +316,7 @@ Stage1 = {
         this.pauseBtnMenu.visible=false;
 
 
-     
+        // Botao Settings na  janela de pause
         this.pauseBtnSettings = game.add.button(
             porcentagem(50,window.innerWidth),
             porcentagem(50,window.innerHeight), 'settingPausedBtn', null,this);
@@ -322,7 +328,35 @@ Stage1 = {
     update: function() {
 
     
-      
+        if(Math.floor(this.player.x-25)%50 === 0 && 
+           Math.floor(this.player.y-25)%50 === 0){
+
+            var playerCol = Math.floor(this.player.x / 50);
+            var playerRow = Math.floor(this.player.y / 50);
+
+            if(this.maze[playerRow][playerCol +1]  === 16){
+                    
+                console.log(this.maze[playerRow][playerCol +1]*50)
+             }
+    
+             if(this.maze[playerRow][playerCol -1]  === 16){
+    
+                console.log(this.maze[playerRow][playerCol -1]*50)
+            }
+         
+             if(this.maze[playerRow + 1][playerCol]  === 16){
+    
+                console.log(this.maze[playerRow +1][playerCol]*50)
+            }
+         
+    
+             if(this.maze[playerRow - 1][playerCol]  === 16){
+    
+                console.log(this.maze[playerRow - 1][playerCol]*50)
+            }
+         
+
+        }
       
 
        this.player.body.velocity.x = 0;
@@ -428,7 +462,7 @@ Stage1 = {
  },
 
 
-// Controle de inimigos
+// Funçao cria inimigos
 	EnemyFactory : function(posX,posY, direction, enemySprite){
 
 		this.enemy = game.add.sprite(posX,posY,enemySprite);
@@ -451,6 +485,12 @@ Stage1 = {
 	},
 
 
+// funçao que contem direcao no qual inimigos na tela podem se mover
+// todas regras de objetivos dos inimigos sao definidas aqui.
+//
+// Ex: Caso o jogador aproxime-se do inimigo dentro de raio de 400px
+//     inimigo deve começar persegui-lo pelo cenario ate que jogador se 
+//     afaste.
 moveEnemy: function(enemy){
 
     this.enemy = enemy;
@@ -532,13 +572,8 @@ moveEnemy: function(enemy){
            this.player.x <1100 && this.player.y < 1050
           ){
             Perserguir()
-            console.log('perseguindo vc '+  this.enemy.directio)
-
-         
         }else{
             patrulhandoArea()
-            console.log('patrulhando area....')
-
         }
 
         this.enemy.direction = validPath[Math.floor(Math.random() * validPath.length)];
@@ -572,9 +607,18 @@ damageControll: function(){
   console.log('pego pelo zumbie')
 },
 
-mensager : function(){
-   
-
+getItem: function(item){
+    if(this.item.x-50 < this.player.x && 
+        this.item.x+50 >  this.player.x &&
+        this.item.y-50 < this.player.y &&
+        this.item.y+50 > this.player.y 
+       ){
+         console.log('pegar item?')
+         this.btnB.onInputDown.add(function(){
+          alert('pegou item')
+        }, this);
+      
+     }
 },
 
 render: function() {

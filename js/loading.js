@@ -53,6 +53,7 @@ Loading = {
 
         game.load.spritesheet('telhadoAlto','tileset/velhoTelhado_alto.png', 50,50);
         game.load.spritesheet('telhado','tileset/velhoTelhado.png', 50,50);
+        game.load.spritesheet('chamine1','tileset/chamine1.png', 50,50);
 
         game.load.spritesheet('ParedeVelha_alto','tileset/ParedeVelha_alto.png', 50,50);
         game.load.spritesheet('ParedeVelha_baixa','tileset/ParedeVelha_baixa.png', 50,50);
@@ -66,6 +67,7 @@ Loading = {
         game.load.spritesheet('ParedeVelha_Janela','tileset/ParedeVelha_Janela.png', 50,50);
         game.load.spritesheet('ParedeVelha_Janela_luz','tileset/ParedeVelha_Janela_luz.png', 50,50);
         game.load.spritesheet('JanelaPiscando_animacao','tileset/JanelaPiscando_animacao.png', 50,50);
+        game.load.spritesheet('liveBau','tileset/liveBau.png', 50,50);
 
         game.load.spritesheet('velhoCercado','tileset/velhoCercado.png', 50,50);
 
