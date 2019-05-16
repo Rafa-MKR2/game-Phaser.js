@@ -8,7 +8,7 @@ Stage1 = {
    var music =  game.add.audio('welcome')
        music.loop = true;
        music.volume = .1;
-       music.play();
+     // music.play();
 
     
        this.player;
@@ -17,7 +17,7 @@ Stage1 = {
        this.controls = game.input.keyboard.createCursorKeys();
    
         
-   
+   this.actionPlayer = false;
        
 
        game.world.setBounds(0, 0,2000, 2000);
@@ -41,10 +41,10 @@ Stage1 = {
         game.physics.arcade.enable(this.enemy3);
 
 
-      
+      this.bauPosition = []
 
        this.player = game.add.sprite(900, 700, 'player');
-       game.add.tileSprite(0, 0, 2000, 2000, 'noite');
+         game.add.tileSprite(0, 0, 2000, 2000, 'noite');
 
   
 
@@ -57,7 +57,7 @@ Stage1 = {
        this.maze = [
            [3,3,3,3,3,3,3,3,3,3,0,0,5,5,5,5,5,5,5,5,5,1],
            [3,3,3,3,3,3,3,3,3,3,10,10,8,8,4,11,4,4,8,8,4],
-           [3,3,3,3,3,3,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0],
+           [3,3,3,3,3,3,3,3,3,3,16,0,0,0,0,0,0,0,0,0,0,0],
            [1,3,3,3,3,3,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,1],
            [1,5,5,5,5,5,5,5,5,5,0,0,0,0,0,0,0,0,0,0,0,1],
            [1,4,4,9,4,4,9,6,4,4,0,0,0,0,0,0,0,0,0,0,0,1],
@@ -80,7 +80,7 @@ Stage1 = {
            [3,3,3,8,8,5,5,5,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
            [5,5,5,13,12,14,11,14,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
            [4,4,4,12,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-           [1,0,0,0,0,0,0,0,0,7,7,7,7,7,7,7,7,7,0,0,0,1],
+           [1,0,16,0,0,0,0,0,0,7,7,7,7,7,7,7,7,7,0,0,0,1],
            [1,0,0,0,0,0,0,0,0,3,3,3,3,3,3,3,3,3,0,0,0,1],
            [1,0,0,0,0,0,0,0,0,3,3,3,3,3,3,3,3,3,0,0,0,1],
            [1,0,0,0,0,0,0,0,0,5,5,5,5,5,5,5,5,5,0,0,0,1],
@@ -127,10 +127,8 @@ Stage1 = {
                        this.player.animations.add('goLeft',[4,5,6,7],12,true);
                        this.player.animations.add('goRight',[8,9,10,11],12,true);
                        this.player.animations.add('goUp',[12,13,14,15],12,true);
-                       this.player.animations.add('shotingDown',[16],4,true);
-                       this.player.animations.add('shotingLeft',[20],4,true);
-                       this.player.animations.add('shotingRight',[24],4,true);
-                       this.player.animations.add('shotingUp',[28],4,true);
+                       this.player.animations.add('playstop',[16,17,18,19],2,true);
+
 
                    } else
                    if(tile === 7){
@@ -195,14 +193,25 @@ Stage1 = {
                     chamine1.body.immovable = true;
                    }
                    if(tile === 16){
-                    var liveBau = this.blocks.create(x,y,'liveBau');
-                   
-                    liveBau.body.immovable = true;
+                   var position = {
+                       x: x+25,
+                       y : y+15
                    }
+                   this.bauPosition.push(position)
+                }
                }
            }
-   
+           
+           // bau item 
+           this.bau = {}
+           this.bau.position = this.NovaPosicao()
+           this.bau =  this.blocks.create(this.bau.position.x,this.bau.position.y,'liveBau');
+           this.bau.animations.add('open',[0,2],1,false)
+           this.bau.anchor.set(.5)
+           this.bau.body.immovable = true;
+           this.bau.aberto  = false
 
+      
            // Controle MObile
            if(GameConfig.mobile==true){
            this.btnA = game.add.button(
@@ -290,6 +299,13 @@ Stage1 = {
           
             
                     
+            this.btnB.onInputUp.add(function(){
+               if(this.actionPlayer){
+                this.bau.animations.play('open')
+                this.bau.aberto  =true
+                console.log(this.bau.aberto)
+            }
+            }, this);
                  
       
         
@@ -327,37 +343,7 @@ Stage1 = {
    
     update: function() {
 
-    
-        if(Math.floor(this.player.x-25)%50 === 0 && 
-           Math.floor(this.player.y-25)%50 === 0){
-
-            var playerCol = Math.floor(this.player.x / 50);
-            var playerRow = Math.floor(this.player.y / 50);
-
-            if(this.maze[playerRow][playerCol +1]  === 16){
-                    
-                console.log(this.maze[playerRow][playerCol +1]*50)
-             }
-    
-             if(this.maze[playerRow][playerCol -1]  === 16){
-    
-                console.log(this.maze[playerRow][playerCol -1]*50)
-            }
-         
-             if(this.maze[playerRow + 1][playerCol]  === 16){
-    
-                console.log(this.maze[playerRow +1][playerCol]*50)
-            }
-         
-    
-             if(this.maze[playerRow - 1][playerCol]  === 16){
-    
-                console.log(this.maze[playerRow - 1][playerCol]*50)
-            }
-         
-
-        }
-      
+    this.acaoPlayerInterect(this.bau)
 
        this.player.body.velocity.x = 0;
        this.player.body.velocity.y = 0;
@@ -377,9 +363,9 @@ Stage1 = {
 
     
 
-    this.moveEnemy(this.enemy1.animation)   
-    this.moveEnemy(this.enemy2.animation)   
-    this.moveEnemy(this.enemy3.animation)   
+    this.moveEnemy(this.enemy1)   
+    this.moveEnemy(this.enemy2)   
+    this.moveEnemy(this.enemy3)   
 
 
         // player movimento
@@ -415,7 +401,6 @@ Stage1 = {
         this.player.direction = "down";
     }
       
-   
        switch(this.player.direction){ 
            case "left":
                this.player.animations.play('goLeft'); break;
@@ -425,21 +410,11 @@ Stage1 = {
                this.player.animations.play('goUp'); break;
            case "down":
                this.player.animations.play('goDown'); break;
-         case "shotingDown":
-               this.player.animations.play('shotingDown'); break;
-         case "shotingLeft":
-               this.player.animations.play('shotingLeft'); break;
-         case "shotingRight":
-               this.player.animations.play('shotingRight'); break;
-         case "shotingUp":
-               this.player.animations.play('shotingUp'); break;
-         
-
-      
             }
+
        
        if(this.player.body.velocity.x === 0 && this.player.body.velocity.y === 0){
-           this.player.animations.stop();
+        this.player.animations.stop();
        }
    
    },
@@ -471,17 +446,13 @@ Stage1 = {
         
         
 		this.enemy.animations.add('goDown',[0,1,2,3],4,true);
-		this.enemy.animations.add('goLeft',[4,5,6,7],12,true);
+		this.enemy.animations.add('goLeft',[4,5,6,7],4,true);
 		this.enemy.animations.add('goRight',[8,9,10,11],4,true);
 		this.enemy.animations.add('goUp',[12,13,14,15],4,true);
 		
 		this.enemy.direction = direction;
-        this.enemy.animations.add('kaboom');
-
-        var status = {life: 100, animation:this.enemy}
-
      
-		return status;
+		return this.enemy
 	},
 
 
@@ -604,21 +575,33 @@ moveEnemy: function(enemy){
 },
 
 damageControll: function(){
-  console.log('pego pelo zumbie')
+ // console.log('pego pelo zumbie')
 },
 
-getItem: function(item){
-    if(this.item.x-50 < this.player.x && 
-        this.item.x+50 >  this.player.x &&
-        this.item.y-50 < this.player.y &&
-        this.item.y+50 > this.player.y 
-       ){
-         console.log('pegar item?')
-         this.btnB.onInputDown.add(function(){
-          alert('pegou item')
-        }, this);
-      
-     }
+NovaPosicao: function(x,y){
+    var pos = this.bauPosition[Math.floor(Math.random() * this.bauPosition.length)]
+
+    while(this.bau.position=== pos){
+     pos = this.bauPosition[Math.floor(Math.random() * this.bauPosition.length)]
+
+    }
+
+    return pos;
+},
+
+
+acaoPlayerInterect : function(liveBau){
+
+     if(liveBau.x-100 < this.player.x && 
+         liveBau.x+100 >  this.player.x &&
+         liveBau.y-100 < this.player.y &&
+         liveBau.y+100 > this.player.y 
+        ){
+            this.actionPlayer =true;
+        }else{
+            this.actionPlayer =false;
+
+        }
 },
 
 render: function() {

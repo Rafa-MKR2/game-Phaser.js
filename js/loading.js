@@ -71,7 +71,7 @@ Loading = {
 
         game.load.spritesheet('velhoCercado','tileset/velhoCercado.png', 50,50);
 
-        game.load.spritesheet('player','image/play.png',31.50,48.5);
+        game.load.spritesheet('player','tileset/player.png',31.50,48.4);
 
 
         game.load.spritesheet('zumbie1','image/zombie05.png', 32,48);
