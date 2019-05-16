@@ -35,7 +35,8 @@ Loading = {
         game.load.audio('menuSfx', './sfx/Menu.ogg');
         game.load.audio('menuMusic', './sfx/Next to You.mp3');
 
-     
+        game.load.audio('bauOpen', './sfx/Baupress.wav');
+
 
         
         game.load.spritesheet('buttonA', 'image/controles/flatDark35.png', 80, 80);

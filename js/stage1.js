@@ -206,7 +206,9 @@ Stage1 = {
            this.bau = {}
            this.bau.position = this.NovaPosicao()
            this.bau =  this.blocks.create(this.bau.position.x,this.bau.position.y,'liveBau');
-           this.bau.animations.add('open',[0,2],1,false)
+           this.bau.animations.add('open',[0,1],3,false)
+         
+
            this.bau.anchor.set(.5)
            this.bau.body.immovable = true;
            this.bau.aberto  = false
@@ -299,10 +301,11 @@ Stage1 = {
           
             
                     
-            this.btnB.onInputUp.add(function(){
+            this.btnA.onInputUp.add(function(){
                if(this.actionPlayer){
                 this.bau.animations.play('open')
                 this.bau.aberto  =true
+              game.add.audio('bauOpen').play()
                 console.log(this.bau.aberto)
             }
             }, this);
