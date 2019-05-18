@@ -24,15 +24,14 @@ if(window.innerHeight<=360 && window.innerWidth<=740  ||
    window.innerHeight<=427 && window.innerWidth<=980  ||
    window.innerHeight<=414 && window.innerWidth<=736){
 
-    GameConfig.height =window.innerHeight;
+    GameConfig.height = window.innerHeight;
     GameConfig.width =  window.innerWidth;
-    textFont = '10px superstar'
+    GameConfig.textFont = '20px superstar'
     GameConfig.mobile = true;
 }
 
 var game = new Phaser.Game(GameConfig.width, GameConfig.height, Phaser.CANVAS, 'gamecontainer');
 
-document.querySelector('#gamecontainer').style.cursor = 'crosshair';
 
     game.state.add('boot',bootState)
     game.state.add('LoadingState',Loading)

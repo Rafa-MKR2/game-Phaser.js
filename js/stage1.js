@@ -16,9 +16,11 @@ Stage1 = {
        // Teclado controles
        this.controls = game.input.keyboard.createCursorKeys();
    
-        
-   this.actionPlayer = false;
-       
+        // define se personagem podem ou nao executar uma acao 
+        this.actionPlayer = false;
+
+           
+
 
        game.world.setBounds(0, 0,2000, 2000);
        game.add.tileSprite(0, 0, 2000, 2000, 'villagerGround');
@@ -48,16 +50,18 @@ Stage1 = {
 
   
 
+        //new Rectangle(x, y, width, height)
 
        game.physics.startSystem(Phaser.Physics.P2JS);
+       game.camera.deadzone = new Phaser.Rectangle(100, 100, 250, 100);
        game.camera.follow(this.player);
-       game.camera.deadzone = new Phaser.Rectangle(250, 100, 350, 100);
+
        
    
        this.maze = [
            [3,3,3,3,3,3,3,3,3,3,0,0,5,5,5,5,5,5,5,5,5,1],
            [3,3,3,3,3,3,3,3,3,3,10,10,8,8,4,11,4,4,8,8,4],
-           [3,3,3,3,3,3,3,3,3,3,16,0,0,0,0,0,0,0,0,0,0,0],
+           [3,3,3,3,3,3,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0],
            [1,3,3,3,3,3,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,1],
            [1,5,5,5,5,5,5,5,5,5,0,0,0,0,0,0,0,0,0,0,0,1],
            [1,4,4,9,4,4,9,6,4,4,0,0,0,0,0,0,0,0,0,0,0,1],
@@ -69,8 +73,8 @@ Stage1 = {
            [1,0,0,0,0,0,0,0,0,5,5,5,5,5,5,5,5,5,0,0,0,1],
            [1,0,0,0,0,0,0,0,0,4,8,4,6,4,8,4,8,4,0,0,0,1],
            [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-           [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-           [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+           [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,16,0,0,1],
+           [1,0,0,0,0,0,0,0,0,0,0,16,0,0,0,0,0,0,0,0,0,1],
            [1,0,0,0,0,0,0,0,0,0,0,0,0,0,16,0,0,0,0,0,0,1],
            [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
            [7,7,7,7,7,15,7,7,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
@@ -146,12 +150,11 @@ Stage1 = {
                    }else
                    if(tile === 5){
                     var ParedeVelha_alto = this.blocks.create(x,y,'ParedeVelha_alto');
-                    ParedeVelha_alto.body.immovable = true;
+                        ParedeVelha_alto.body.immovable = true;
                    }else
 
                    if(tile === 6){
-                    var door = this.blocks.create(x,y,'door1');
-                    door.body.immovable = true;
+                       var porta1 = this.portaComum(x,y,null,'door1')
                    }
                    if(tile === 8){
                     var ParedeVelha_Janela = this.blocks.create(x,y,'ParedeVelha_Janela');
@@ -203,17 +206,30 @@ Stage1 = {
            }
            
            // bau item 
-           this.bau = {}
-           this.bau.position = this.NovaPosicao()
+           this.bau = {};
+           this.bau.position = this.NovaPosicao();
            this.bau =  this.blocks.create(this.bau.position.x,this.bau.position.y,'liveBau');
-           this.bau.animations.add('open',[0,1],3,false)
-         
-
-           this.bau.anchor.set(.5)
+           this.bau.animations.add('open',[0,1],3,false);
+           this.bau.anchor.set(.5);
            this.bau.body.immovable = true;
-           this.bau.aberto  = false
+           this.bau.aberto  = false;
+
+
+
 
       
+           this.textAlertWord =  game.add.text(
+            porcentagem(48,window.innerWidth), 25,'',
+              { font: GameConfig.textFont,
+                wordWrap: true, 
+                wordWrapWidth: GameConfig.width,
+                fill: '#fff'
+            });
+
+         this.textAlertWord.anchor.set(.5);
+            this.textAlertWord.fixedToCamera=true;
+  
+
            // Controle MObile
            if(GameConfig.mobile==true){
            this.btnA = game.add.button(
@@ -296,52 +312,42 @@ Stage1 = {
                     
                         }, this,4, 3, 5);
                         this.btnDown.fixedToCamera=true;
-            }
-            // fim do controles MObile
-          
-            
-                    
+
+                                     
             this.btnA.onInputUp.add(function(){
-               if(this.actionPlayer){
-                this.bau.animations.play('open')
-                this.bau.aberto  =true
-              game.add.audio('bauOpen').play()
-                console.log(this.bau.aberto)
-            }
-            }, this);
+                if(this.actionPlayer){
+
+                if(!this.bau.aberto){
+                    this.bau.animations.play('open')
+                    this.bau.aberto  =true
+                    game.add.audio('bauOpen').play()
+                    this.textAlertWord.text ='Bau aberto....';
+                    game.time.events.add(3000,function(){
+                        game.add.tween( this.textAlertWord).to({ alpha:0 }, 1000,null,true);                    
+
+                    },this)
+                }else{
+                    this.textAlertWord.text ='Bau vazio...';
+                    game.add.tween( this.textAlertWord).to({ alpha:5 }, 1000,null,true);                    
+
+                    game.time.events.add(1500,function(){
+                        game.add.tween( this.textAlertWord).to({ alpha:0 }, 1000,null,true);                    
+
+                    },this)
+                }
+               
+             }
+             }, this);
+
+            }// fim do controles MObile
+          
+           
+            
+            // funçao de interface do Menu de Pause
+            this.pauseInterfaceMenu()
                  
-      
-        
-        // Puase menu Background
-        this.pauseBg =  game.add.image(
-            porcentagem(50,window.innerWidth),
-            porcentagem(40,window.innerHeight), 'pauseBg');
-           this.pauseBg.anchor.set(.5)
-           this.pauseBg.visible =false;
-           this.pauseBg.fixedToCamera=true;
+           
 
-
-        // Botao Menu na  janela de pause
-        this.pauseBtnMenu = game.add.button(
-            porcentagem(50,window.innerWidth),
-            porcentagem(35,window.innerHeight), 'menuPausedBtn', function(){
-                game.paused=false;
-                music.stop();
-                loadingMusic.play();
-                game.state.start('menu',true,false)
-            },this);
-        this.pauseBtnMenu.anchor.set(.5)
-        this.pauseBtnMenu.fixedToCamera=true;
-        this.pauseBtnMenu.visible=false;
-
-
-        // Botao Settings na  janela de pause
-        this.pauseBtnSettings = game.add.button(
-            porcentagem(50,window.innerWidth),
-            porcentagem(50,window.innerHeight), 'settingPausedBtn', null,this);
-        this.pauseBtnSettings.anchor.set(.5)
-        this.pauseBtnSettings.fixedToCamera=true;
-        this.pauseBtnSettings.visible=false;
    },
    
     update: function() {
@@ -421,6 +427,41 @@ Stage1 = {
        }
    
    },
+   pauseInterfaceMenu : function(){
+   
+        // Puase menu Background
+        this.pauseBg = game.add.image(
+            porcentagem(50,window.innerWidth),
+            porcentagem(40,window.innerHeight), 'pauseBg');
+           this.pauseBg.anchor.set(.5)
+           this.pauseBg.visible =false;
+           this.pauseBg.fixedToCamera=true;
+
+
+        // Botao Menu na  janela de pause
+        this.pauseBtnMenu = game.add.button(
+            porcentagem(50,window.innerWidth),
+            porcentagem(35,window.innerHeight), 'menuPausedBtn', function(){
+                game.paused=false;
+                music.stop();
+                loadingMusic.play();
+                game.state.start('menu',true,false)
+            },this);
+        this.pauseBtnMenu.anchor.set(.5)
+        this.pauseBtnMenu.fixedToCamera=true;
+        this.pauseBtnMenu.visible=false;
+
+
+        // Botao Settings na  janela de pause
+        this.pauseBtnSettings = game.add.button(
+            porcentagem(50,window.innerWidth),
+            porcentagem(50,window.innerHeight), 'settingPausedBtn', null,this);
+        this.pauseBtnSettings.anchor.set(.5)
+        this.pauseBtnSettings.fixedToCamera=true;
+        this.pauseBtnSettings.visible=false;
+
+   },
+
    pause : function(){
 
     if(game.paused==true){
@@ -593,12 +634,12 @@ NovaPosicao: function(x,y){
 },
 
 
-acaoPlayerInterect : function(liveBau){
+acaoPlayerInterect : function(objeto){
 
-     if(liveBau.x-100 < this.player.x && 
-         liveBau.x+100 >  this.player.x &&
-         liveBau.y-100 < this.player.y &&
-         liveBau.y+100 > this.player.y 
+     if(objeto.x-100 < this.player.x && 
+        objeto.x+100 >  this.player.x &&
+        objeto.y-100 < this.player.y &&
+        objeto.y+100 > this.player.y 
         ){
             this.actionPlayer =true;
         }else{
@@ -606,12 +647,19 @@ acaoPlayerInterect : function(liveBau){
 
         }
 },
+portaComum: function(posX,posY,key,sprite){
 
+    var porta = {};
+        porta = this.blocks.create(posX,posY,sprite);
+        porta.body.immovable = true;
+        porta.aberta =true;
+        porta.key = key;
+
+    return porta;
+},
 render: function() {
-   
-   
-     //  game.debug.cameraInfo(game.camera, 32, 32);
-       game.debug.spriteCoords(this.player, 32, 500);
+     //  game.debug.cameraInfo
+    //   game.debug.spriteCoords(this.player);
 
    }
    
