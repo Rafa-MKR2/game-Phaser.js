@@ -5,9 +5,9 @@ Stage1 = {
     create: function() {
    
        loadingMusic.stop();
-   var music =  game.add.audio('welcome')
-       music.loop = true;
-       music.volume = .1;
+   this.music =  game.add.audio('welcome')
+   this.music.loop = true;
+    this.music.volume = .1;
      // music.play();
 
     
@@ -443,7 +443,7 @@ Stage1 = {
             porcentagem(50,window.innerWidth),
             porcentagem(35,window.innerHeight), 'menuPausedBtn', function(){
                 game.paused=false;
-                music.stop();
+                this.music.stop();
                 loadingMusic.play();
                 game.state.start('menu',true,false)
             },this);
