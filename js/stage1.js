@@ -4,10 +4,10 @@ Stage1 = {
 
     create: function() {
    
-       loadingMusic.stop();
+    gameMusic.stop();
    this.music =  game.add.audio('welcome')
    this.music.loop = true;
-    this.music.volume = .1;
+   this.music.volume = .1;
      // music.play();
 
     
@@ -216,14 +216,12 @@ Stage1 = {
 
 
 
-
-      
            this.textAlertWord =  game.add.text(
             porcentagem(48,window.innerWidth), 25,'',
               { font: GameConfig.textFont,
                 wordWrap: true, 
                 wordWrapWidth: GameConfig.width,
-                fill: '#fff'
+                fill: '#fff' 
             });
 
          this.textAlertWord.anchor.set(.5);
@@ -341,6 +339,9 @@ Stage1 = {
 
             }// fim do controles MObile
           
+
+
+        
            
             
             // funçao de interface do Menu de Pause
@@ -444,7 +445,7 @@ Stage1 = {
             porcentagem(35,window.innerHeight), 'menuPausedBtn', function(){
                 game.paused=false;
                 this.music.stop();
-                loadingMusic.play();
+                gameMusic.play();
                 game.state.start('menu',true,false)
             },this);
         this.pauseBtnMenu.anchor.set(.5)
@@ -657,6 +658,8 @@ portaComum: function(posX,posY,key,sprite){
 
     return porta;
 },
+
+
 render: function() {
      //  game.debug.cameraInfo
     //   game.debug.spriteCoords(this.player);

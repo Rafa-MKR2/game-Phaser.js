@@ -121,7 +121,7 @@ create:function() {
       var selecione = this.menu[this.select];
 
      selecione===this.NewGame ? 
-       game.state.start('stage1') : null;
+       game.state.start('casa1') : null;
       
       selecione===this.option ? 
         game.state.start('options') : null;

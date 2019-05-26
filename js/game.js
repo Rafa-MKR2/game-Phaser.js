@@ -41,5 +41,8 @@ var game = new Phaser.Game(GameConfig.width, GameConfig.height, Phaser.CANVAS, '
 
     game.state.add('stage1',Stage1)
 
+    game.state.add('casa1',Casa1)
+
+
     // inicia carregamento
     game.state.start("boot")
