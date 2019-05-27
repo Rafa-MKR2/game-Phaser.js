@@ -3,6 +3,12 @@ Casa1 = {
     create : function(){
         gameMusic.stop();
 
+        gameMusic = game.add.audio('relogioSfx')
+        gameMusic.loop=true;
+        gameMusic.volume = .2;
+
+        gameMusic.play()
+
         game.world.setBounds(-100, -100,1200, 1200);
 
         game.add.tileSprite(0, 0, 800,500, 'homeGround');
@@ -141,14 +147,17 @@ Casa1 = {
 
                     // Moveis estaticos 
                     
+
+
                      game.add.sprite(80,100,'barrilMovel').anchor.set(.5);
                      game.add.sprite(120,100,'barril').anchor.set(.5) 
                      game.add.sprite(150,100,'barril').anchor.set(.5) 
                      game.add.sprite(185,48,'cortinaEsquerda').anchor.set(.5) 
                      game.add.sprite(310,48,'cortinaDireita').anchor.set(.5) 
 
-                     game.add.sprite(535,48,'cortinaEsquerda').anchor.set(.5) 
-                     game.add.sprite(660,48,'cortinaDireita').anchor.set(.5) 
+                    // game.add.sprite(535,48,'cortinaEsquerda').anchor.set(.5) 
+                    //game.add.sprite(660,48,'cortinaDireita').anchor.set(.5) 
+                     game.add.sprite(600,49,'cortinaEstendida').anchor.set(.5) 
 
 
                      var mesa = this.blocks.create(150,250,'mesaComum');
@@ -192,6 +201,14 @@ Casa1 = {
               
            }
         }
+
+
+
+
+       // this.dialogue = game.add.sprite(50,10,'dialogue');
+       // this.dialogue.fixedToCamera = true;
+       // this.dialogue.anchor.set(.5) 
+
 
     },
     update : function(){

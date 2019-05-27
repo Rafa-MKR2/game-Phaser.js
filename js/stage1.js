@@ -17,7 +17,10 @@ Stage1 = {
        this.controls = game.input.keyboard.createCursorKeys();
    
         // define se personagem podem ou nao executar uma acao 
-        this.actionPlayer = false;
+        this.playerActionPLay = function(teste){ 
+            // 
+            console.log(teste)
+        }
 
            
 
@@ -208,11 +211,45 @@ Stage1 = {
            // bau item 
            this.bau = {};
            this.bau.position = this.NovaPosicao();
-           this.bau =  this.blocks.create(this.bau.position.x,this.bau.position.y,'liveBau');
+           this.bau = this.blocks.create(this.bau.position.x,this.bau.position.y,'liveBau');
            this.bau.animations.add('open',[0,1],3,false);
            this.bau.anchor.set(.5);
            this.bau.body.immovable = true;
+
            this.bau.aberto  = false;
+           this.bau.qualidade = 1;
+           this.bau.actionPlayer = function(){
+
+            if(this.bau.actionPlayer){
+                if(!this.bau.aberto){
+                    this.bau.animations.play('open')
+                    this.bau.aberto  =true
+                    game.add.audio('bauOpen').play()
+                    this.textAlertWord.text ='Bau aberto....';
+                    this.playerActionPLay = function(){ 
+                        alert('teste foi realizado')
+                    }();
+                    game.time.events.add(3000,function(){
+                        game.add.tween( this.textAlertWord).to({ alpha:0 }, 1000,null,true);                    
+                     
+                    },this)
+                }else{
+                    this.textAlertWord.text ='Bau vazio...';
+                    game.add.tween( this.textAlertWord).to({ alpha:5 }, 1000,null,true);                    
+                    this.playerActionPLay = function(){ 
+                        console.log('teste foi mudado ')
+                    }();
+                    game.time.events.add(1500,function(){
+                        game.add.tween( this.textAlertWord).to({ alpha:0 }, 1000,null,true);                    
+                        
+                    },this)
+                }
+               
+                }
+           }
+
+
+
 
 
 
@@ -313,28 +350,7 @@ Stage1 = {
 
                                      
             this.btnA.onInputUp.add(function(){
-                if(this.actionPlayer){
-
-                if(!this.bau.aberto){
-                    this.bau.animations.play('open')
-                    this.bau.aberto  =true
-                    game.add.audio('bauOpen').play()
-                    this.textAlertWord.text ='Bau aberto....';
-                    game.time.events.add(3000,function(){
-                        game.add.tween( this.textAlertWord).to({ alpha:0 }, 1000,null,true);                    
-
-                    },this)
-                }else{
-                    this.textAlertWord.text ='Bau vazio...';
-                    game.add.tween( this.textAlertWord).to({ alpha:5 }, 1000,null,true);                    
-
-                    game.time.events.add(1500,function(){
-                        game.add.tween( this.textAlertWord).to({ alpha:0 }, 1000,null,true);                    
-
-                    },this)
-                }
-               
-             }
+                 this.playerActionPLay()
              }, this);
 
             }// fim do controles MObile
@@ -428,6 +444,7 @@ Stage1 = {
        }
    
    },
+
    pauseInterfaceMenu : function(){
    
         // Puase menu Background
@@ -637,16 +654,17 @@ NovaPosicao: function(x,y){
 
 acaoPlayerInterect : function(objeto){
 
-     if(objeto.x-100 < this.player.x && 
-        objeto.x+100 >  this.player.x &&
-        objeto.y-100 < this.player.y &&
-        objeto.y+100 > this.player.y 
+     if(objeto.x-50 < this.player.x && 
+        objeto.x+50 >  this.player.x &&
+        objeto.y-50 < this.player.y &&
+        objeto.y+50 > this.player.y 
         ){
-            this.actionPlayer =true;
+            objeto.PlayerInterect =true;
         }else{
-            this.actionPlayer =false;
-
+            objeto.PlayerInterect =false;
         }
+
+        return objeto;
 },
 portaComum: function(posX,posY,key,sprite){
 

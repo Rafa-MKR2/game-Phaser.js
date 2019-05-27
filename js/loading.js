@@ -34,6 +34,7 @@ Loading = {
         game.load.audio('portaOpen', './sfx/qubodup-DoorClose03.ogg');
         game.load.audio('bauOpen', './sfx/qubodup-DoorClose01.ogg');
 
+        game.load.audio('relogioSfx', './sfx/clock.ogg');
 
         // Controle Mobile  
         game.load.spritesheet('buttonA', 'image/controles/flatDark35.png', 80, 80);
@@ -74,7 +75,11 @@ Loading = {
         game.load.spritesheet('cadeira','tileset/home/cadeira.png', 50,65);
         game.load.spritesheet('cortinaEsquerda','tileset/home/cortinaEsquerda.png', 50,100);
         game.load.spritesheet('cortinaDireita','tileset/home/cortinaDireita.png', 50,100);
+       
+        game.load.spritesheet('cortinaEstendida','tileset/home/cortinaEstendida.png', 200,200);
+
         game.load.spritesheet('mesaComum','tileset/home/mesaComum.png', 50,100);
+
 
         // NPC 
         game.load.spritesheet('npc_Balcao','tileset/home/npc_Balcao.png', 33,50);
