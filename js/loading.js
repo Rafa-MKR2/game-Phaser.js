@@ -43,7 +43,8 @@ Loading = {
         game.load.spritesheet('buttonRight', 'image/controles/flatDark05.png', 80, 80);
         game.load.spritesheet('buttonLeft', 'image/controles/flatDark04.png', 80, 80);
         game.load.spritesheet('buttonDown', 'image/controles/flatDark09.png', 80, 80);
-        game.load.spritesheet('pause', 'image/controles/flatDark41.png', 80, 80);
+        game.load.spritesheet('buttonStart', 'image/controles/flatDark41.png', 80, 80); 
+        game.load.spritesheet('buttonSelect', 'image/controles/flatDark42.png', 80, 80);
 
         game.load.spritesheet('menuAnimation','image/Mainmenu/shadowTeste2.png',200,48);
         game.load.spritesheet('saveBook','tileset/saveBook.png',33.4,40);
@@ -90,8 +91,9 @@ Loading = {
         game.load.spritesheet('chamine1','tileset/chamine1.png', 50,50);
         game.load.spritesheet('ParedeVelha_alto','tileset/ParedeVelha_alto.png', 50,50);
         game.load.spritesheet('ParedeVelha_baixa','tileset/ParedeVelha_baixa.png', 50,50);
-        game.load.spritesheet('door1','tileset/PortaVelha.png', 50,50);
-        game.load.spritesheet('door2','tileset/portaVelha_azul.png', 50,50);
+        game.load.spritesheet('porta_comum','tileset/porta_comum.png', 35,50);
+        game.load.spritesheet('porta_comum_azul','tileset/porta_comum_azul.png', 50,50);
+
         game.load.spritesheet('barril','tileset/barril.png', 50,50);
         game.load.spritesheet('conjuntoDeBarril','tileset/conjuntoDeBarril.png', 50,50);
         game.load.spritesheet('ParedeVelha_Janela','tileset/ParedeVelha_Janela.png', 50,50);
@@ -100,10 +102,12 @@ Loading = {
         game.load.spritesheet('liveBau','tileset/liveBau.png', 50,50);
 
         game.load.spritesheet('velhoCercado','tileset/velhoCercado.png', 50,50);
+        game.load.spritesheet('CercaMetal_Lateral','tileset/CercaMetal_Lateral.png', 50,50);
+
         game.load.spritesheet('player','tileset/player.png',31.50,48.4);
-        game.load.spritesheet('zumbie1','image/zombie05.png', 32,48);
-        game.load.spritesheet('zumbie2','image/zombie06.png', 32,48);
-        game.load.spritesheet('zumbie3','image/zombie08.png', 32,48);
+        game.load.spritesheet('zumbie1','image/enemy/zombie05.png', 32,48);
+        game.load.spritesheet('zumbie2','image/enemy/zombie06.png', 32,48);
+        game.load.spritesheet('zumbie3','image/enemy/zombie08.png', 32,48);
 
         game.load.image('settingsBG','image/Settings/SettingsBG.png')
         game.load.image('BTNPLAY','image/Mainmenu/BTNPLAY.png');
@@ -116,9 +120,11 @@ Loading = {
         game.load.image('menuPausedBtn','image/Pausemenu/BTNMENU.png');
         game.load.image('settingPausedBtn','image/Pausemenu/BTNSETTINGS.png');
 
+        game.load.image('inventaryBG','image/Inventory/InventoryStats.png');
+
+
         game.load.image('noite','image/noite.png');
         game.load.image('dialogue','tileset/dialogue.png'); 
-        game.load.image('background','image/bg.png');
         game.load.image('villagerGround','tileset/ground.png');
         game.load.image('homeGround','tileset/home/home1_ground.png');
 

@@ -33,6 +33,16 @@ Stage1 = {
        this.P = game.input.keyboard.addKey(Phaser.Keyboard.P); 
        this.P.onDown.add(this.pause, this);
 
+       this.enter = game.input.keyboard.addKey(Phaser.Keyboard.ENTER); 
+
+       this.space = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR); 
+       this.space.onDown.add(this.Inventory, this);
+
+
+       // Inventario do jogador
+
+       this.inventarioPlayer = []
+
       
 
         // Inimigos gerados
@@ -65,37 +75,37 @@ Stage1 = {
            [3,3,3,3,3,3,3,3,3,3,0,0,5,5,5,5,5,5,5,5,5,1],
            [3,3,3,3,3,3,3,3,3,3,10,10,8,8,4,11,4,4,8,8,4],
            [3,3,3,3,3,3,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0],
-           [1,3,3,3,3,3,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,1],
-           [1,5,5,5,5,5,5,5,5,5,0,0,0,0,0,0,0,0,0,0,0,1],
-           [1,4,4,9,4,4,9,6,4,4,0,0,0,0,0,0,0,0,0,0,0,1],
-           [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-           [1,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-           [1,0,0,0,0,0,0,0,0,7,7,7,7,7,7,7,15,7,0,0,0,1],
-           [1,0,0,0,0,0,0,0,0,3,3,3,3,3,3,3,3,3,0,0,0,1],
-           [1,0,0,0,0,0,0,0,0,3,3,3,3,3,3,3,3,3,0,0,0,1],
-           [1,0,0,0,0,0,0,0,0,5,5,5,5,5,5,5,5,5,0,0,0,1],
-           [1,0,0,0,0,0,0,0,0,4,8,4,6,4,8,4,8,4,0,0,0,1],
-           [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-           [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,16,0,0,1],
-           [1,0,0,0,0,0,0,0,0,0,0,16,0,0,0,0,0,0,0,0,0,1],
-           [1,0,0,0,0,0,0,0,0,0,0,0,0,0,16,0,0,0,0,0,0,1],
-           [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-           [7,7,7,7,7,15,7,7,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-           [3,3,3,3,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-           [3,3,3,3,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-           [3,3,3,5,5,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-           [3,3,3,8,8,5,5,5,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-           [5,5,5,13,12,14,11,14,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-           [4,4,4,12,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-           [1,0,16,0,0,0,0,0,0,7,7,7,7,7,7,7,7,7,0,0,0,1],
-           [1,0,0,0,0,0,0,0,0,3,3,3,3,3,3,3,3,3,0,0,0,1],
-           [1,0,0,0,0,0,0,0,0,3,3,3,3,3,3,3,3,3,0,0,0,1],
-           [1,0,0,0,0,0,0,0,0,5,5,5,5,5,5,5,5,5,0,0,0,1],
-           [1,0,0,0,0,0,0,0,0,4,8,4,6,4,8,4,8,4,0,0,0,1],
-           [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-           [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-           [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-           [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+           [17,3,3,3,3,3,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,17],
+           [17,5,5,5,5,5,5,5,5,5,0,0,0,0,0,0,0,0,0,0,0,17],
+           [17,4,4,9,4,4,9,6,4,4,0,0,0,0,0,0,0,0,0,0,0,17],
+           [17,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,17],
+           [17,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,17],
+           [17,0,0,0,0,0,0,0,0,7,7,7,7,7,7,7,15,7,0,0,0,17],
+           [17,0,0,0,0,0,0,0,0,3,3,3,3,3,3,3,3,3,0,0,0,17],
+           [17,0,0,0,0,0,0,0,0,3,3,3,3,3,3,3,3,3,0,0,0,17],
+           [17,0,0,0,0,0,0,0,0,5,5,5,5,5,5,5,5,5,0,0,0,17],
+           [17,0,0,0,0,0,0,0,0,4,8,4,6,4,8,4,8,4,0,0,0,17],
+           [17,0,0,0,0,0,0,0,0,0,0,0,0,0,16,0,0,0,0,0,0,17],
+           [17,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,16,0,17],
+           [17,0,0,0,0,0,0,0,0,0,0,16,0,0,0,0,0,0,0,0,0,17],
+           [17,0,0,0,0,0,0,0,16,0,0,16,0,0,16,0,0,0,0,0,0,17],
+           [17,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,17],
+           [7,7,7,7,7,15,7,7,0,0,0,0,0,0,0,0,0,0,0,0,0,17],
+           [3,3,3,3,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,17],
+           [3,3,3,3,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,17],
+           [3,3,3,5,5,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,17],
+           [3,3,3,8,8,5,5,5,0,0,0,0,0,0,0,0,0,0,0,0,0,17],
+           [5,5,5,13,12,14,11,14,0,0,0,0,0,0,0,0,0,0,0,0,0,17],
+           [4,4,4,12,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,17],
+           [1,0,0,0,0,0,0,0,0,7,7,7,7,7,7,7,7,7,0,0,0,17],
+           [1,0,0,0,0,0,0,0,0,3,3,3,3,3,3,3,3,3,0,0,0,17],
+           [1,0,0,0,0,0,0,0,0,3,3,3,3,3,3,3,3,3,0,0,0,17],
+           [1,0,0,0,0,0,0,0,0,5,5,5,5,5,5,5,5,5,0,0,0,17],
+           [1,0,0,0,0,0,0,0,0,4,8,4,6,4,8,4,8,4,0,0,0,17],
+           [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,17],
+           [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,17],
+           [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,17],
+           [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,17],
            [1,1,1,1,1,1,1,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1]
          
        ];
@@ -157,7 +167,11 @@ Stage1 = {
                    }else
 
                    if(tile === 6){
-                       var porta1 = this.portaComum(x,y,null,'door1')
+                    var ParedeVelha_baixa = this.blocks.create(x,y,'ParedeVelha_baixa');
+                        ParedeVelha_baixa.body.immovable = true;
+
+                    var porta1 = this.portaComum(x,y,null,'porta_comum')
+
                    }
                    if(tile === 8){
                     var ParedeVelha_Janela = this.blocks.create(x,y,'ParedeVelha_Janela');
@@ -175,8 +189,10 @@ Stage1 = {
                    }
                    else
                    if(tile === 11){
-                    var door2 = this.blocks.create(x,y,'door2');
+
+                    var door2 = this.blocks.create(x,y,'ParedeVelha_baixa');
                     door2.body.immovable = true;
+                    var porta2 = this.portaComum(x,y,null,'porta_comum_azul')
                    }
                    else
                    if(tile === 12){
@@ -188,69 +204,38 @@ Stage1 = {
                     var barrilComplemento = this.blocks.create(x,y,'conjuntoDeBarril');
                     barrilComplemento.body.immovable = true;
                    }
+                   else
                    if(tile === 14){
                     var animacaoJanela = this.blocks.create(x,y,'JanelaPiscando_animacao');
                     animacaoJanela.animations.add('active',[0,1],1,true);
                     animacaoJanela.animations.play('active')
                     animacaoJanela.body.immovable = true;
                    }
+                   else
                    if(tile === 15){
                     var chamine1 = this.blocks.create(x,y,'chamine1');
                     chamine1.body.immovable = true;
                    }
+                   else
                    if(tile === 16){
+                       // captura posição do bau
                    var position = {
                        x: x+25,
                        y : y+15
                    }
                    this.bauPosition.push(position)
                 }
-               }
-           }
-           
-           // bau item 
-           this.bau = {};
-           this.bau.position = this.NovaPosicao();
-           this.bau = this.blocks.create(this.bau.position.x,this.bau.position.y,'liveBau');
-           this.bau.animations.add('open',[0,1],3,false);
-           this.bau.anchor.set(.5);
-           this.bau.body.immovable = true;
-
-           this.bau.aberto  = false;
-           this.bau.qualidade = 1;
-           this.bau.actionPlayer = function(){
-
-            if(this.bau.actionPlayer){
-                if(!this.bau.aberto){
-                    this.bau.animations.play('open')
-                    this.bau.aberto  =true
-                    game.add.audio('bauOpen').play()
-                    this.textAlertWord.text ='Bau aberto....';
-                    this.playerActionPLay = function(){ 
-                        alert('teste foi realizado')
-                    }();
-                    game.time.events.add(3000,function(){
-                        game.add.tween( this.textAlertWord).to({ alpha:0 }, 1000,null,true);                    
-                     
-                    },this)
-                }else{
-                    this.textAlertWord.text ='Bau vazio...';
-                    game.add.tween( this.textAlertWord).to({ alpha:5 }, 1000,null,true);                    
-                    this.playerActionPLay = function(){ 
-                        console.log('teste foi mudado ')
-                    }();
-                    game.time.events.add(1500,function(){
-                        game.add.tween( this.textAlertWord).to({ alpha:0 }, 1000,null,true);                    
-                        
-                    },this)
-                }
+                else
+                if(tile === 17){
+                    var CercaMetal_Lateral = this.blocks.create(x,y,'CercaMetal_Lateral');
+                    CercaMetal_Lateral.body.immovable = true;
+             
+                    }
                
                 }
            }
-
-
-
-
+           
+          
 
 
            this.textAlertWord =  game.add.text(
@@ -279,11 +264,17 @@ Stage1 = {
                         this.btnB.fixedToCamera=true;
 
             
-            this.pauseButton = game.add.button(
+            this.startButton = game.add.button(
                         porcentagem(55,window.innerWidth),
-                        porcentagem(85,window.innerHeight), 'pause', this.pause, this,4, 3, 5);
-                        this.pauseButton.anchor.set(.5)
-                        this.pauseButton.fixedToCamera=true;
+                        porcentagem(85,window.innerHeight), 'buttonStart', this.pause, this,4, 3, 5);
+                        this.startButton.anchor.set(.5)
+                        this.startButton.fixedToCamera=true;
+            
+            this.selectButton = game.add.button(
+                            porcentagem(40,window.innerWidth),
+                            porcentagem(85,window.innerHeight), 'buttonSelect',this.Inventory, this,4, 3, 5);
+                            this.selectButton.anchor.set(.5)
+                            this.selectButton.fixedToCamera=true;
         
             this.btnUp = game.add.button(
                         porcentagem(10,window.innerWidth),
@@ -349,27 +340,44 @@ Stage1 = {
                         this.btnDown.fixedToCamera=true;
 
                                      
-            this.btnA.onInputUp.add(function(){
-                 this.playerActionPLay()
-             }, this);
-
+           
             }// fim do controles MObile
           
 
 
-        
-           
-            
+
+          // Declara cada bau do cenario
+            this.bau1 =  this.bau();
+            this.bau2 =  this.bau();
+            this.bau3 =  this.bau();
+            this.bau4 =  this.bau();
+
+             
+                 
             // funçao de interface do Menu de Pause
             this.pauseInterfaceMenu()
-                 
+            
+            this.status =  game.add.image(
+                porcentagem(50,window.innerWidth),
+                porcentagem(40,window.innerHeight), 'inventaryBG');
+                 this.status.anchor.set(.5)
+                 this.status.fixedToCamera =true;
+                 this.status.visible = false;
+        
            
 
    },
    
     update: function() {
 
-    this.acaoPlayerInterect(this.bau)
+    this.acaoPlayerInterect(this.bau1)
+
+    this.acaoPlayerInterect(this.bau2)
+
+    this.acaoPlayerInterect(this.bau3)
+
+    this.acaoPlayerInterect(this.bau4)
+
 
        this.player.body.velocity.x = 0;
        this.player.body.velocity.y = 0;
@@ -651,7 +659,7 @@ NovaPosicao: function(x,y){
     return pos;
 },
 
-
+// detecta se jogador estar proximo do objeto para interagir 
 acaoPlayerInterect : function(objeto){
 
      if(objeto.x-50 < this.player.x && 
@@ -664,7 +672,7 @@ acaoPlayerInterect : function(objeto){
             objeto.PlayerInterect =false;
         }
 
-        return objeto;
+        return objeto.actionPlayer;
 },
 portaComum: function(posX,posY,key,sprite){
 
@@ -677,6 +685,64 @@ portaComum: function(posX,posY,key,sprite){
     return porta;
 },
 
+bau : function(){
+
+
+       // bau item 
+       var bau = {};
+       bau.position = this.NovaPosicao();
+       bau = this.blocks.create(bau.position.x,bau.position.y,'liveBau');
+       bau.animations.add('open',[0,1],3,false);
+       bau.anchor.set(.5);
+       bau.body.immovable = true;
+
+       bau.aberto  = false;
+       bau.qualidade = 1;
+       bau.actionPlayer =  !this.btnA? 
+                            this.enter.onDown.add(interagir, this) :
+                            this.btnA.onInputUp.add(interagir, this);
+
+       function interagir(){
+
+        if(bau.PlayerInterect){
+            if(!bau.aberto){
+                bau.animations.play('open')
+                bau.aberto  =true
+                game.add.audio('bauOpen').play()
+                this.textAlertWord.text ='Bau aberto....';
+                game.time.events.add(3000,function(){
+                    game.add.tween( this.textAlertWord).to({ alpha:0 }, 1000,null,true);                    
+                 
+                },this)
+            }else{
+                this.textAlertWord.text ='Bau vazio...';
+                game.add.tween( this.textAlertWord).to({ alpha:5 }, 1000,null,true);                    
+                game.time.events.add(1500,function(){
+                    game.add.tween( this.textAlertWord).to({ alpha:0 }, 1000,null,true);                    
+                    
+                },this)
+            }
+          }
+        }
+
+     // retorna um novo bau  
+     return  bau
+},
+
+Inventory : function(){
+
+  
+    if(game.paused==true){
+        game.paused=false;
+        this.status.visible =false;
+      
+    }else if(game.paused==false){
+        game.paused=true;
+        this.status.visible =true;
+      
+        return;
+    }
+},
 
 render: function() {
      //  game.debug.cameraInfo
