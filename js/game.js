@@ -6,9 +6,11 @@ function porcentagem(percent,valor){
     return resultado
 }
 
+
+
 var GameConfig ={
     height : 600,
-    width : 900,
+    width : 800,
     titleFont :  '60px superstar',
     textFont :  '40px superstar',
 
@@ -22,7 +24,11 @@ if(window.innerHeight<=360 && window.innerWidth<=740  ||
    window.innerHeight<=360 && window.innerWidth<=640  || 
    window.innerHeight<=384 && window.innerWidth<=640  ||
    window.innerHeight<=427 && window.innerWidth<=980  ||
-   window.innerHeight<=414 && window.innerWidth<=736){
+   window.innerHeight<=414 && window.innerWidth<=736  ||
+   window.innerHeight<=540 && window.innerWidth<=970){
+
+    document.querySelector("#gamecontainer").style.padding = "0px"; 
+    document.querySelector("#gamecontainer").style.marginLeft = "0px"; 
 
     GameConfig.height = window.innerHeight;
     GameConfig.width =  window.innerWidth;

@@ -4,7 +4,7 @@
 }
 *{
     margin: 0;
-    padding: 0;
+    padding: 1px;
     border: 0;
 }
 
@@ -13,6 +13,10 @@ body{
 }
 
 
+
+#gamecontainer{
+    margin-left: 15%;
+}
 
 .texto{
     font-family: superstar;

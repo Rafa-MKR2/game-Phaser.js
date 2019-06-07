@@ -21,11 +21,16 @@ create:function() {
      .anchor.set(.5)
      .fixedToCamera=true;
     
-    this.NewGame = game.add.button( game.world.centerX, game.world.centerY,'BTNPLAY',null, this, 1,3,2)
+    this.NewGame = game.add.button( game.world.centerX, game.world.centerY,'BTNPLAY',function(){
+      game.state.start('stage1')
+  
+    }, this, 1,3,2)
     this.NewGame.fixedToCamera=true;
     this.NewGame.anchor.set(.5) 
 
-     this.option = game.add.button(game.world.centerX,game.world.centerY+80,'BTNSETTINGS',null, this, 1,3,2)
+     this.option = game.add.button(game.world.centerX,game.world.centerY+80,'BTNSETTINGS',function(){
+      game.state.start('options') 
+     }, this, 1,3,2)
      this.option.fixedToCamera=true;
      this.option.anchor.set(.5)
 
@@ -121,7 +126,7 @@ create:function() {
       var selecione = this.menu[this.select];
 
      selecione===this.NewGame ? 
-       game.state.start('stage1') : null;
+       game.state.start('casa1') : null;
       
       selecione===this.option ? 
         game.state.start('options') : null;
