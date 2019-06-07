@@ -25,7 +25,8 @@ if(window.innerHeight<=360 && window.innerWidth<=740  ||
    window.innerHeight<=384 && window.innerWidth<=640  ||
    window.innerHeight<=427 && window.innerWidth<=980  ||
    window.innerHeight<=414 && window.innerWidth<=736  ||
-   window.innerHeight<=540 && window.innerWidth<=970){
+   window.innerHeight<=540 && window.innerWidth<=975  ||
+   window.innerHeight<=970 && window.innerWidth<=540){
 
     document.querySelector("#gamecontainer").style.padding = "0px"; 
     document.querySelector("#gamecontainer").style.marginLeft = "0px"; 
