@@ -202,7 +202,100 @@ Casa1 = {
            }
         }
 
-
+        
+         // Controle MObile
+         if(GameConfig.mobile==true){
+            this.btnA = game.add.button(
+                         porcentagem(70,window.innerWidth),
+                         porcentagem(70,window.innerHeight), 'buttonA',null, this, 1, 0, 2);
+                         this.btnA.fixedToCamera=true;
+ 
+             this.btnB = game.add.button(
+                         porcentagem(85,window.innerWidth),
+                         porcentagem(70,window.innerHeight), 'buttonB',  function(){
+                         }, this,4, 3, 5);
+                         this.btnB.fixedToCamera=true;
+ 
+             
+             this.startButton = game.add.button(
+                         porcentagem(55,window.innerWidth),
+                         porcentagem(85,window.innerHeight), 'buttonStart', this.pause, this,4, 3, 5);
+                         this.startButton.anchor.set(.5)
+                         this.startButton.fixedToCamera=true;
+             
+             this.selectButton = game.add.button(
+                             porcentagem(40,window.innerWidth),
+                             porcentagem(85,window.innerHeight), 'buttonSelect',this.Inventory, this,4, 3, 5);
+                             this.selectButton.anchor.set(.5)
+                             this.selectButton.fixedToCamera=true;
+         
+             this.btnUp = game.add.button(
+                         porcentagem(10,window.innerWidth),
+                         porcentagem(50,window.innerHeight), 'buttonUp', function(){
+                         
+                             this.btnUp.onInputDown.add(function(){
+                                 this.controls.up.isDown =true;
+                             }, this);
+ 
+                             this.btnUp.onInputUp.add(function(){
+                                 this.controls.up.isDown =false;
+                             }, this);
+                     
+                         },this, 4, 3, 5);
+                         this.btnUp.fixedToCamera=true;
+ 
+         
+             this.btnRight = game.add.button(
+                         porcentagem(15,window.innerWidth),
+                         porcentagem(65,window.innerHeight), 'buttonRight',  
+                         function(){
+                         
+                             this.btnRight.onInputDown.add(function(){
+                                 this.controls.right.isDown =true;
+                             }, this);
+ 
+                             this.btnRight.onInputUp.add(function(){
+                                 this.controls.right.isDown =false;
+                             }, this);
+                     
+                         },this,4, 3, 5);
+                         this.btnRight.fixedToCamera=true;
+ 
+                
+             this.btnLeft = game.add.button(
+                         porcentagem(3,window.innerWidth),
+                         porcentagem(65,window.innerHeight), 'buttonLeft', function(){
+                         
+                             this.btnLeft.onInputDown.add(function(){
+                                 this.controls.left.isDown =true;
+                             }, this);
+ 
+                             this.btnLeft.onInputUp.add(function(){
+                                 this.controls.left.isDown =false;
+                             }, this);
+                     
+                         }, this,4, 3, 5);
+                         this.btnLeft.fixedToCamera=true;
+ 
+              this.btnDown =  game.add.button(
+                         porcentagem(10,window.innerWidth),
+                         porcentagem(75,window.innerHeight), 'buttonDown',function(){
+                         
+                             this.btnDown.onInputDown.add(function(){
+                                 this.controls.down.isDown =true;
+                             }, this);
+ 
+                             this.btnDown.onInputUp.add(function(){
+                                 this.controls.down.isDown =false;
+                             }, this);
+                     
+                         }, this,4, 3, 5);
+                         this.btnDown.fixedToCamera=true;
+ 
+                                      
+            
+             }// fim do controles MObile
+           
 
 
        // this.dialogue = game.add.sprite(50,10,'dialogue');
