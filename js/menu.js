@@ -22,7 +22,7 @@ create:function() {
      .fixedToCamera=true;
     
     this.NewGame = game.add.button( game.world.centerX, game.world.centerY,'BTNPLAY',function(){
-      game.state.start('casa1')
+      game.state.start('stage1')
   
     }, this, 1,3,2)
     this.NewGame.fixedToCamera=true;
