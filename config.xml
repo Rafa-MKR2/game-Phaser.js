@@ -13,6 +13,7 @@
   <author href="https://rafael.codarts.com.br/" email="rafaeldocarmo2010@gmail.com">
       Rafael D.Carmo
   </author>
+  <icon src="icon.png" />
 
   <!-- all platforms -->
   <preference name="orientation" value="landscape" />
