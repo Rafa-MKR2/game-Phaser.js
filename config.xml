@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<widget xmlns   = "http://www.w3.org/ns/widgets"
+    xmlns:gap   = "http://phonegap.com/ns/1.0"
+    id          = "com.phonegap.example"
+    versionCode = "10"
+    version     = "1.0.0" >
+
+  <name>Rafa-MK3 - Game Mobile RPG</name>
+  <description>
+      Jogo de teste mobile RPG criado por Rafael D.Carmo
+      site oficial : https://rafael.codarts.com.br/
+  </description>
+  <author href="https://rafael.codarts.com.br/" email="rafaeldocarmo2010@gmail.com">
+      Rafael D.Carmo
+  </author>
+
+  <!-- all platforms -->
+  <preference name="phonegap-version" value="cli-6.0.0" />
+  <preference name="orientation" value="landscape" />
+  <preference name="fullscreen" value="true" />
+
+  <!-- iOS only -->
+  <preference name="target-device" value="universal" />
+  <preference name="prerendered-icon" value="true" />
+  <preference name="detect-data-types" value="true" />
+  <preference name="exit-on-suspend" value="true" />
+  <preference name="deployment-target" value="7.0" />
+
+  <!-- Android only -->
+  <preference name="android-build-tool" value="ant|gradle" />
+  <preference name="android-minSdkVersion" value="10" />
+  <preference name="android-maxSdkVersion" value="15" />
+  <preference name="android-targetSdkVersion" value="12" />
+  <preference name="android-installLocation" value="auto" />
+  <preference name="android-windowSoftInputMode" value="stateVisible|adjustResize" />
+</widget>
